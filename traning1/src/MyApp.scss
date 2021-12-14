@@ -1,0 +1,76 @@
+.app__content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.app__title {
+  text-align: center;
+}
+
+.rating-list {
+  h4 {
+    margin: 10px;
+    padding: 0;
+    font-size: 18px;
+  }
+}
+
+.rating-list button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 26px;
+
+  &:hover {
+    color: gold;
+  }
+}
+
+.on {
+  color: gold;
+}
+
+.off {
+  color: #ccc;
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h3 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  button {
+    width: 200px;
+    margin: 0 auto;
+    padding: 6px;
+
+    font-size: 18px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      border: 1px solid #DCDCDC;
+    }
+  }
+}
+
+.accordion__items {
+  width: 450px;
+  padding: 20px;
+  margin: 0 auto;
+  font-size: 20px;
+
+  li {
+    padding: 20px;
+  }
+}
+
