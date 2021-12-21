@@ -3,7 +3,7 @@ import {AccordionBody, AccordionTitle } from "./Accordion";
 
 function UncontrolledAccordion() {
   console.log("UncontrolledAccordion rendering");
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState<boolean>(false);
 
   return (
     <div className="accordion">

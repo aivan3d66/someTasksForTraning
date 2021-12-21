@@ -2,8 +2,8 @@ import {useState} from "react";
 import "../../MyApp.scss";
 
 function UncontrolledRating() {
-  const [rating, setRating] = useState(0);
-  const [hover, setHover] = useState(0);
+  const [rating, setRating] = useState<number>(0);
+  const [hover, setHover] = useState<number>(0);
   console.log("Rating rendering");
   return (
     <div className="rating-list">
