@@ -4,15 +4,18 @@ function Accordion(props: PropsType) {
   console.log("Accordion rendering");
   return (
     <div className="accordion">
-      <AccordionTitle title={props.title}/>
-      {!props.collapsed && <AccordionBody/> }
+      <AccordionTitle title={props.title} onChange={props.onChange}/>
+      {!props.collapsed && <AccordionBody/>}
     </div>
   )
 }
 
 export function AccordionTitle(props: PropsType) {
   console.log("AccordionTitle rendering");
-  return <h3 className="accordion__title">{props.title}</h3>
+  return <h3 className="accordion__title"
+             onClick={props.onChange}
+
+  >{props.title}</h3>
 }
 
 
