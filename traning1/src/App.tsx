@@ -1,15 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import Accordion from './components/Accordion/Accordion';
 // import Rating from './components/Raiting/Raiting';
 import './MyApp.scss';
 import {OnOffItem} from "./components/OnOff/OnOff";
 import UncontrolledAccordion from "./components/Accordion/UncontrolledAcordion";
 import UncontrolledRating from "./components/Raiting/UncontrolledRating";
+import Accordion from './components/Accordion/Accordion';
 
 export type PropsType = {
   title?: string,
   value?: number,
   collapsed?: boolean,
+  onChange?: () => void
 }
 
 function PageTitle(props: PropsType) {
@@ -18,19 +20,22 @@ function PageTitle(props: PropsType) {
 }
 
 function App() {
+  const [collapseAcc, setCollapseAcc] = useState(false);
+
+  const onChange = () => setCollapseAcc(!collapseAcc);
+
   console.log("App rendering");
   return (
     <div className="app__content">
       <PageTitle title={"William Shakespeare works"}/>
-      {/*<Rating value={1}/>*/}
-      {/*<Rating value={2}/>*/}
-      {/*<Rating value={3}/>*/}
-      {/*<Rating value={4}/>*/}
-      {/*<Rating value={5}/>*/}
-      {/*<Accordion title={"Menu"} collapsed={true}/>*/}
-      {/*<Accordion title={"Users"} collapsed={false}/>*/}
       <UncontrolledAccordion />
       <UncontrolledRating />
+      <br/>
+      <hr/>
+      <Accordion title={"Controlled title"}
+                 collapsed={collapseAcc}
+                 onChange={onChange}
+      />
       <br/>
       <hr/>
       <OnOffItem/>
