@@ -3,7 +3,7 @@ import {OnOff} from "./OnOff";
 
 
 export default {
-  title: 'OnOff button',
+  title: 'components/OnOff button',
   component: OnOff,
 }
 

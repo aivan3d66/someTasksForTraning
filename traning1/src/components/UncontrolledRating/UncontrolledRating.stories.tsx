@@ -2,7 +2,7 @@ import UncontrolledRating from "./UncontrolledRating";
 import React from "react";
 
 export default {
-  title: 'UncontrolledRating stories',
+  title: 'components/UncontrolledRating stories',
   component: UncontrolledRating,
 }
 

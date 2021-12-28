@@ -2,7 +2,7 @@ import React from 'react';
 import UncontrolledAccordion from "./UncontrolledAcordion";
 
 export default {
-  title: 'UncontrolledAccordion stories',
+  title: 'components/UncontrolledAccordion stories',
   component: UncontrolledAccordion,
 }
 
