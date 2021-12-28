@@ -11,11 +11,12 @@ function UncontrolledRating() {
       {[...Array(5)].map((star: number, index: number) => {
         index += 1;
         return (
-          <button key={index}
-                  className={index <= (hover || rating) ? "on" : "off"}
-                  onClick={() => setRating(index)}
-                  onMouseEnter={() => setHover(index)}
-                  onMouseLeave={() => setHover(rating)}>
+          <button
+            key={index}
+            className={index <= (hover || rating) ? "on" : "off"}
+            onClick={() => setRating(index)}
+            onMouseEnter={() => setHover(index)}
+            onMouseLeave={() => setHover(rating)}>
             <span className="star">&#9733;</span>
           </button>
         )

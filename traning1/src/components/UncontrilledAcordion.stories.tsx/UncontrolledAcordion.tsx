@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {AccordionBody, AccordionTitle } from "./Accordion";
+import {AccordionBody, AccordionTitle } from "../Accordion/Accordion";
 
 function UncontrolledAccordion() {
   console.log("UncontrolledAccordion rendering");
