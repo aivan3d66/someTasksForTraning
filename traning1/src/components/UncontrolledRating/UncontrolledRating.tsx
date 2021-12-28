@@ -1,8 +1,12 @@
 import {useState} from "react";
 import "../../MyApp.scss";
 
-function UncontrolledRating() {
-  const [rating, setRating] = useState<number>(0);
+type PropsType = {
+  defaultValue?: 0 | 1 | 2 | 3 | 4 | 5
+}
+
+function UncontrolledRating(props: PropsType) {
+  const [rating, setRating] = useState<number>(props.defaultValue ? props.defaultValue : 0);
   const [hover, setHover] = useState<number>(0);
   console.log("Rating rendering");
   return (
