@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 // import Accordion from './components/Accordion/Accordion';
-// import Rating from './components/Raiting/Raiting';
+// import Rating from './components/Rating/Rating';
 import './MyApp.scss';
-import {OnOffItem} from "./components/OnOff/OnOff";
-import UncontrolledAccordion from "./components/Accordion/UncontrolledAcordion";
-import UncontrolledRating from "./components/Raiting/UncontrolledRating";
+import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UnconrtolledOnOff";
+import UncontrolledAccordion from "./components/UncontrilledAcordion.stories.tsx/UncontrolledAcordion";
+import UncontrolledRating from "./components/UncontrolledRating/UncontrolledRating";
 import Accordion from './components/Accordion/Accordion';
+import {OnOff} from "./components/OnOff/OnOff";
 
 export type PropsType = {
   title?: string,
@@ -28,18 +29,20 @@ function App() {
   return (
     <div className="app__content">
       <PageTitle title={"William Shakespeare works"}/>
-      <UncontrolledAccordion />
-      <UncontrolledRating />
+      <UncontrolledAccordion/>
+      <UncontrolledRating/>
+      <UncontrolledOnOff/>
       <br/>
       <hr/>
-      <Accordion title={"Controlled title"}
-                 collapsed={collapseAcc}
-                 onChange={onChange}
+      <Accordion
+        title={"Controlled title"}
+        collapsed={collapseAcc}
+        onChange={onChange}
       />
+      <OnOff on={true}/>
       <br/>
       <hr/>
-      <OnOffItem/>
-      <OnOffItem/>
+      <UncontrolledOnOff/>
     </div>
   );
 }
