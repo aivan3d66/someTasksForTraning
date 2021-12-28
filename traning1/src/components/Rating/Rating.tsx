@@ -1,8 +1,8 @@
-type RatingPropsType = {
+export type RatingPropsType = {
   value: 0 | 1 | 2 | 3 | 4 | 5
 }
 
-type StarPropsType = {
+export type StarPropsType = {
   selected: boolean
 }
 
