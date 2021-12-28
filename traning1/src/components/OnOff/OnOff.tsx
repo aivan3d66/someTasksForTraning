@@ -1,11 +1,14 @@
-// import './onOff.scss';
+import React from "react";
 
-import {useState} from "react";
+type OnOffProps = {
+  on: boolean,
+}
 
-export const OnOffItem = () => {
-  console.log("onOffRendering");
-  let [on, setOn] = useState(false);
-
+export const OnOff: React.FC<OnOffProps> = (
+  {
+    on
+  }
+) => {
   const onStyle = {
     display: "inline-block",
     width: "30px",
@@ -34,9 +37,9 @@ export const OnOffItem = () => {
 
   return (
     <div className="onOffList__item">
-      <button onClick={() => setOn(true)} style={onStyle}>On
+      <button onClick={() => on} style={onStyle}>On
       </button>
-      <button onClick={() => setOn(false)} style={offStyle}>Off
+      <button onClick={() => !on} style={offStyle}>Off
       </button>
       <div style={indicatorStyle}>*</div>
     </div>
