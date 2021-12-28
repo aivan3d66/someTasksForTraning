@@ -1,6 +1,4 @@
 import React, {useState} from 'react';
-// import Accordion from './components/Accordion/Accordion';
-// import Rating from './components/Rating/Rating';
 import './MyApp.scss';
 import {UncontrolledOnOff} from "./components/UncontrolledOnOff/UnconrtolledOnOff";
 import UncontrolledAccordion from "./components/UncontrilledAcordion.stories.tsx/UncontrolledAcordion";
@@ -12,8 +10,20 @@ export type PropsType = {
   title?: string,
   value?: number,
   collapsed?: boolean,
-  onChange?: () => void
+  onChange?: () => void,
+  onClick?: () => void,
+  /**
+   * Elements are showed when accordion is opened (not collapsed)
+   */
+  items?: Array<any>,
 }
+
+export const itemsList = [
+  {title: 'John', value: 1},
+  {title: 'Rick', value: 2},
+  {title: 'Morty', value: 3},
+  {title: 'Geralt', value: 4},
+];
 
 function PageTitle(props: PropsType) {
   console.log("AppTitle rendering");
