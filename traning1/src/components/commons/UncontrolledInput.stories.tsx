@@ -5,7 +5,8 @@ export default {
   // component: input,
 }
 
-export const UncontrolledInput = () => <input/>
+export const UncontrolledInput = () => <input/>;
+
 export const TrackValueUncontrolledInput = () => {
   const [value, setValue] = useState("");
 
@@ -19,7 +20,7 @@ export const TrackValueUncontrolledInput = () => {
       <input onChange={inputOnChange}/> - {value}
     </>
   )
-}
+};
 
 export const TrackValueUncontrolledInputBtn = () => {
   const [value, setValue] = useState("");
@@ -39,4 +40,20 @@ export const TrackValueUncontrolledInputBtn = () => {
       actual value - {value}
     </>
   )
+};
+
+export const ControlledInput = () => {
+  const [parentValue, setParentValue] = useState('');
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setParentValue(e.currentTarget.value)
+  }
+  return <input value={parentValue} onChange={onChange}/>;
+}
+
+export const ControlledCheckbox = () => {
+  const [parentValue, setParentValue] = useState(true);
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setParentValue(e.currentTarget.checked)
+  }
+  return <input type="checkbox" onChange={onChange} checked={parentValue}/>;
 }
