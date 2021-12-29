@@ -20,7 +20,6 @@ export const ControlButtons: React.FC<ControlButtonsProps> = (
     <div className="btnWrapper">
       <SuperButton
         onClick={onIncrementHandler}
-        error={error}
         disabled={!!error}
       >
         inc
