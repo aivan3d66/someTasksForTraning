@@ -11,11 +11,11 @@ export const ScreenComponent: React.FC<ScreenComponentProps> = (
     error
   }
 ) => {
+  const finalClassName = `${error ? "screenContentRed" : "screenContent"}`
+
   return (
-    <div className="screenContent">
-      <div>
-        Counter: {screenValue}
-      </div>
+    <div className={finalClassName}>
+      Counter: {screenValue}
       {error && <div className="errorName">{error}</div>}
     </div>
   )
