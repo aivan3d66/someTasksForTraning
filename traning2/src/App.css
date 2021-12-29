@@ -8,18 +8,20 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
+  background-image: url("./email-pattern.png");
 }
 
 .App {
   position: relative;
   width: 400px;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 20px 0 0 0;
 
   font-size: 20px;
 
   background-color: #b2b2b2;
   border-radius: 10px;
+  box-shadow: 0 0 10px 5px rgba(105, 105, 105, 0.8);
 }
 
 .screenContent {
@@ -28,11 +30,11 @@ body {
   padding: 20px;
   margin: 20px;
 
-
   font-size: 28px;
   color: blue;
   background-color: greenyellow;
   border-radius: 10px;
+  border: 2px solid rgba(50, 205, 50, 1);
 }
 
 .screenContentRed {
@@ -44,7 +46,8 @@ body {
 
   font-size: 28px;
   color: white;
-  background-color: red;
+  background-color: rgba(128, 0, 0, 1);
+  border: 2px solid rgba(255, 0, 0, 1);
   border-radius: 10px;
 }
 
