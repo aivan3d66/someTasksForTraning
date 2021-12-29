@@ -2,15 +2,11 @@ import React, {ButtonHTMLAttributes, DetailedHTMLProps} from 'react'
 import s from './SuperButton.module.css'
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
-type SuperButtonPropsType = DefaultButtonPropsType & {
-  red?: boolean,
-  error?: string,
-}
 
-const SuperButton: React.FC<SuperButtonPropsType> = (
+
+const SuperButton: React.FC<DefaultButtonPropsType> = (
   {
     className,
-    error,
     ...restProps
   }
 ) => {
