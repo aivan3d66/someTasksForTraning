@@ -3,7 +3,6 @@ import s from './SuperButton.module.css'
 
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
-
 const SuperButton: React.FC<DefaultButtonPropsType> = (
   {
     className,
