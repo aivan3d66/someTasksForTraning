@@ -1,13 +1,13 @@
 import React from "react";
 
 type ScreenComponentProps = {
-  screenValue: number,
+  counter: number,
   error: string
 }
 
 export const ScreenComponent: React.FC<ScreenComponentProps> = (
   {
-    screenValue,
+    counter,
     error
   }
 ) => {
@@ -15,7 +15,7 @@ export const ScreenComponent: React.FC<ScreenComponentProps> = (
 
   return (
     <div className={finalClassName}>
-      Counter: {screenValue}
+      Counter: {counter}
       {error && <div className="errorName">{error}</div>}
     </div>
   )

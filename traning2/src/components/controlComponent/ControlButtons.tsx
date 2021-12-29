@@ -1,11 +1,12 @@
 import SuperButton from "../SuperButton/SuperButton";
 import React from "react";
+import {OnIncrementHandler, OnResetHandler} from "../../App";
 
 type ControlButtonsProps = {
-  onIncrementHandler: () => void,
-  onResetHandler: () => void,
+  onIncrementHandler: OnIncrementHandler,
+  onResetHandler: OnResetHandler,
   error: string,
-  screenValue: number
+  counter: number
 }
 
 export const ControlButtons: React.FC<ControlButtonsProps> = (
@@ -13,9 +14,10 @@ export const ControlButtons: React.FC<ControlButtonsProps> = (
     onIncrementHandler,
     onResetHandler,
     error,
-    screenValue
+    counter
   }
 ) => {
+
   return (
     <div className="btnWrapper">
       <SuperButton
@@ -26,7 +28,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = (
       </SuperButton>
       <SuperButton
         onClick={onResetHandler}
-        disabled={screenValue === 0}
+        disabled={counter === 0}
       >
         reset
       </SuperButton>
