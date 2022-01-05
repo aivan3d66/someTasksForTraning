@@ -13,8 +13,28 @@ const ERROR_MESSAGE: string = "Достигнуто максимальное ч�
 const COUNT_TICK: number = 1;
 
 function App() {
-  const [counter, setCounter] = useState<number>(0);
   const [error, setError] = useState<string>("");
+  const [counter, setCounter] = useState<number>(0);
+  const [maxValue, setMaxValue] = useState<number>(0);
+
+  const setLocalStorage = () => {
+    saveCounter("counter-max-value", maxValue)
+    saveCounter("counter-start-value", counter)
+  }
+  const getLocalStorage = () => {
+    let valueStart = restoreCounter("counter-start-value", counter);
+    setCounter(Number(valueStart))
+
+    let valueMax = restoreCounter("counter-max-value", maxValue);
+    setMaxValue(Number(valueMax))
+  }
+
+  useEffect(() => {
+    getLocalStorage()
+  }, [])
+
+  console.log(counter);
+  console.log(maxValue);
 
   const onIncrementHandler: OnIncrementHandler = () => {
     if (counter < MAX_COUNT) {
