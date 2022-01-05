@@ -15,7 +15,7 @@ export const ScreenComponent: React.FC<ScreenComponentProps> = (
 
   return (
     <div className={finalClassName}>
-      Counter: {counter}
+      {counter}
       {error && <div className="errorName">{error}</div>}
     </div>
   )
