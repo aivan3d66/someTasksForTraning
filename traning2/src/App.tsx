@@ -48,6 +48,14 @@ function App() {
     setError("")
   }
 
+  const getMaxNumber = (value: number) => {
+    setMaxValue(value);
+  }
+
+  const getStartNumber = (value: number) => {
+    setCounter(value);
+  }
+
   return (
     <div className="App">
       <ScreenComponent
