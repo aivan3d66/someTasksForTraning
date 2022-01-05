@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import './App.css';
 import {ControlButtons} from "./components/controlComponent/ControlButtons";
 import {ScreenComponent} from "./components/screenComponent/ScreenComponent";
+import SuperInputText from "./components/SuperInput/SuperInputText";
+import SuperButton from "./components/SuperButton/SuperButton";
+import {restoreCounter, saveCounter} from "./components/localStorage";
 
 export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
