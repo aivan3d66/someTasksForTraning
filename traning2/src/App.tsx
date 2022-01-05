@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {ControlButtons} from "./components/controlComponent/ControlButtons";
 import {ScreenComponent} from "./components/screenComponent/ScreenComponent";
@@ -37,14 +37,15 @@ function App() {
   console.log(maxValue);
 
   const onIncrementHandler: OnIncrementHandler = () => {
-    if (counter < MAX_COUNT) {
-      setCounter(counter + COUNT_TICK);
+    if (counter < maxValue) {
+      setCounter(Number(counter) + COUNT_TICK);
     } else {
       setError(ERROR_MESSAGE);
     }
   }
+
   const onResetHandler: OnResetHandler = () => {
-    setCounter(0);
+    getLocalStorage();
     setError("")
   }
 
