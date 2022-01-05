@@ -58,16 +58,41 @@ function App() {
 
   return (
     <div className="App">
-      <ScreenComponent
-        counter={counter}
-        error={error}
-      />
-      <ControlButtons
-        error={error}
-        onIncrementHandler={onIncrementHandler}
-        onResetHandler={onResetHandler}
-        counter={counter}
-      />
+      <div className="counter-interface">
+        <ScreenComponent
+          counter={counter}
+          error={error}
+        />
+        <ControlButtons
+          error={error}
+          onIncrementHandler={onIncrementHandler}
+          onResetHandler={onResetHandler}
+          counter={counter}
+        />
+      </div>
+      <div className="counter-control">
+        <div className="counter-control__item">
+          <label>
+            Max value:
+            <SuperInputText
+              defaultValue={maxValue}
+              getMaxNumber={getMaxNumber}
+            />
+          </label>
+        </div>
+        <div className="counter-control__item">
+          <label>
+            Start value:
+            <SuperInputText
+              defaultValue={counter}
+              getStartNumber={getStartNumber}
+            />
+          </label>
+        </div>
+        <SuperButton onClick={setLocalStorage}>
+          Set
+        </SuperButton>
+      </div>
     </div>
   );
 }
