@@ -10,7 +10,6 @@ export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
 
 const ERROR_MESSAGE: string = "Достигнуто максимальное число счётчика";
-const MAX_COUNT: number = 5;
 const COUNT_TICK: number = 1;
 
 function App() {
