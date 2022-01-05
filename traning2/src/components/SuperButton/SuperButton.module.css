@@ -1,14 +1,14 @@
 .default {
-  min-width: 100px;
+  min-width: 80px;
   padding: 4px;
   margin: 0;
 
-
-  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  color: #292c35;
   border-radius: 5px;
   border: 1px solid rgba(52, 152, 192, 1);
   background-color: rgba(52, 152, 192, 1);
-  box-shadow: 0 1px 1px 1px #b2b2b2;
   cursor: pointer;
 }
 
@@ -16,7 +16,6 @@
   color: #000000;
   transition: 0.3s;
   background-color: rgba(220, 220, 220, 0.8);
-  box-shadow: 0 2px 5px 1px #b2b2b2;
 }
 
 .default:disabled {
@@ -39,20 +38,6 @@
   border-radius: 5px;
   border: 1px solid red;
   cursor: pointer;
-  box-shadow: 0 2px 1px 1px #b2b2b2;
-}
-
-.activeClass {
-  min-width: 30px;
-  padding: 4px;
-  margin: 0;
-
-  color: white;
-  border-radius: 5px;
-  border: 1px solid rgba(34, 139, 34, 1);
-  background-color: rgba(34, 139, 34, 1);
-  box-shadow: 0 1px 1px 1px #b2b2b2;
-  cursor: pointer;
 }
 
 .red:hover,
@@ -60,5 +45,4 @@
   color: #000000;
   transition: 0.5s;
   background-color: rgba(220, 220, 220, 0.8);
-  box-shadow: 0 2px 5px 1px #b2b2b2;
 }
