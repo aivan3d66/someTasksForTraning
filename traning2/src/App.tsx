@@ -72,27 +72,27 @@ function App() {
         />
       </div>
       <div className="counter-control">
-        <div className="counter-control__item">
-          <label>
-            Max value:
+        <div className="counter-control__list">
+          <div className="counter-control__item">
+            <label>Max value:</label>
             <SuperInputText
               defaultValue={maxValue}
               getMaxNumber={getMaxNumber}
             />
-          </label>
-        </div>
-        <div className="counter-control__item">
-          <label>
-            Start value:
+          </div>
+          <div className="counter-control__item">
+            <label>Start value:</label>
             <SuperInputText
               defaultValue={counter}
               getStartNumber={getStartNumber}
             />
-          </label>
+          </div>
         </div>
-        <SuperButton onClick={setLocalStorage}>
-          Set
-        </SuperButton>
+        <div className="counter-control__btn">
+          <SuperButton onClick={setLocalStorage}>
+            Set
+          </SuperButton>
+        </div>
       </div>
     </div>
   );
