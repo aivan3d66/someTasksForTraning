@@ -8,54 +8,31 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-image: url("./email-pattern.png");
+  background-color: #292c35;
 }
 
 .App {
-  width: 400px;
-  margin: 20px auto;
-  padding: 20px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 800px;
+  margin: 60px auto;
+  padding: 0;
 
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 .counter-interface {
   position: relative;
-  margin: 0 auto 40px 0;
-  padding: 20px 0 0 0;
-  height: 250px;
-  font-size: 20px;
+  width: 300px;
+  margin: 0;
+  padding: 0;
+  height: 290px;
 
-  background-color: rgba(192, 192, 192, 1);
   border-radius: 10px;
-  box-shadow: 0 0 10px 5px rgba(105, 105, 105, 0.8);
-}
-
-.counter-control {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto 40px 0;
-  padding: 20px;
-
-  height: 230px;
-  font-size: 20px;
-
-  background-color: rgba(192, 192, 192, 1);
-  border-radius: 10px;
-  box-shadow: 0 0 10px 5px rgba(105, 105, 105, 0.8);
-}
-
-.counter-control__item input {
-  width: 40px;
-  margin:  0 0 0 20px;
-}
-
-.counter-control button {
-  width: 100px;
-  margin: 0 auto;
+  border: 3px solid #44a4c2;
+  box-shadow: 0 0 10px 5px #44a4c2;
 }
 
 .screenContent {
@@ -64,11 +41,11 @@ body {
   padding: 20px;
   margin: 20px;
 
-  font-size: 28px;
-  color: blue;
-  background-color: greenyellow;
+  text-align: center;
+  font-size: 70px;
+  color: #44a4c2;
   border-radius: 10px;
-  border: 2px solid rgba(50, 205, 50, 1);
+  border: 3px solid #44a4c2;
 }
 
 .screenContentRed {
@@ -76,31 +53,87 @@ body {
   height: 100px;
   padding: 20px;
   margin: 20px;
+  font-size: 70px;
+  text-align: center;
 
-
-  font-size: 28px;
   color: white;
   background-color: rgba(128, 0, 0, 1);
-  border: 2px solid rgba(255, 0, 0, 1);
+  border: 3px solid rgba(255, 0, 0, 1);
   border-radius: 10px;
+}
+
+.errorName {
+  position: absolute;
+  top: 20px;
+  right: 36px;
+  padding: 8px;
+  width: auto;
+
+  font-size: 10px;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+}
+
+.counter-control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  margin: 0;
+  padding: 20px;
+  height: 250px;
+
+  border-radius: 10px;
+  border: 3px solid #44a4c2;
+  box-shadow: 0 0 10px 5px #44a4c2;
+}
+
+.counter-control__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  padding: 20px;
+  height: 80px;
+
+  color: #44a4c2;
+  border-radius: 10px;
+  border: 3px solid #44a4c2;
+}
+
+.counter-control__item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.counter-control__item input {
+  width: 90px;
+  margin:  0;
+  text-align: center;
+  border: 3px solid #44a4c2;
+}
+
+.counter-control button {
+  width: 100px;
+  margin: 0 auto;
+}
+
+.counter-control__btn {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 3px solid #44a4c2;
 }
 
 .btnWrapper {
   display: flex;
   justify-content: space-between;
   width: auto;
-  padding: 10px 0 20px 0;
+  padding: 20px;
   margin: 20px;
-}
 
-.errorName {
-  position: absolute;
-  bottom: 90px;
-  right: 36px;
-  padding: 8px;
-  width: auto;
-  text-align: center;
-  color: white;
-  font-size: 16px;
-  border-radius: 5px;
+  border: 3px solid #44a4c2;
+  border-radius: 10px;
 }
