@@ -1,4 +1,5 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent, useState} from 'react'
+import { INCORRECT_MAX_VALUE_MESSAGE } from '../../App'
 import s from './SuperInputText.module.css'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -8,7 +9,8 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
   getStartNumber?: (value: number) => void,
   onEnter?: () => void
   spanClassName?: string,
-  setDisabledButton: (value: boolean) => void
+  setDisabledButton: (value: boolean) => void,
+  message: string
 }
 
 const SuperInput: React.FC<SuperInputTextPropsType> = (
@@ -22,6 +24,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     className,
     spanClassName,
     setDisabledButton,
+    message,
     ...restProps
   }
 ) => {
@@ -29,12 +32,13 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
   const [red, setRed] = useState<boolean>(false)
 
   const onChangeCallback = (e: any) => {
+    setDisabledButton(false)
     if (e.currentTarget.value < 0) {
       setRed(true)
+      setDisabledButton(true)
     } else {
       setRed(false)
     }
-    setDisabledButton(false)
 
     onChange && onChange(e)
 
@@ -50,6 +54,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
   }
 
   const finalInputClassName = `${red ? s.errorInput : s.superInput} ${className}`
+  const redBorderClassName = message === INCORRECT_MAX_VALUE_MESSAGE ? s.errorInput : finalInputClassName;
 
   return (
     <>
@@ -57,7 +62,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
         type={'number'}
         onChange={onChangeCallback}
         onKeyPress={onKeyPressCallback}
-        className={finalInputClassName}
+        className={redBorderClassName}
 
         {...restProps}
       />
