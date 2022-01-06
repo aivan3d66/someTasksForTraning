@@ -32,6 +32,12 @@ function App() {
     let valueMax = restoreCounter("counter-max-value", maxValue);
     setMaxValue(Number(valueMax))
   }
+  const getLocalStorageStartValue = () => {
+    return restoreCounter("counter-start-value", startValue);
+  }
+  const getLocalStorageMaxValue = () => {
+    return restoreCounter("counter-max-value", maxValue);
+  }
 
   useEffect(() => {
     getLocalStorage()
