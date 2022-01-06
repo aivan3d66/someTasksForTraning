@@ -93,14 +93,15 @@ function App() {
     <div className="App">
       <div className="counter-interface">
         <ScreenComponent
-          counter={counter}
+          counter={startValue}
           error={error}
+          message={message}
         />
         <ControlButtons
           error={error}
           onIncrementHandler={onIncrementHandler}
           onResetHandler={onResetHandler}
-          counter={counter}
+          counter={startValue}
         />
       </div>
       <div className="counter-control">
@@ -108,20 +109,25 @@ function App() {
           <div className="counter-control__item">
             <label>Max value:</label>
             <SuperInputText
-              defaultValue={maxValue}
+              defaultValue={getLocalStorageMaxValue()}
               getMaxNumber={getMaxNumber}
+              onFocus={onInputFocus}
             />
           </div>
           <div className="counter-control__item">
             <label>Start value:</label>
             <SuperInputText
-              defaultValue={counter}
+              defaultValue={getLocalStorageStartValue()}
               getStartNumber={getStartNumber}
+              onFocus={onInputFocus}
             />
           </div>
         </div>
         <div className="counter-control__btn">
-          <SuperButton onClick={setLocalStorage}>
+          <SuperButton
+            onClick={setLocalStorage}
+            disabled={setDisableSetBtn()}
+          >
             Set
           </SuperButton>
         </div>
