@@ -1,4 +1,4 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent} from 'react'
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent, useState} from 'react'
 import s from './SuperInputText.module.css'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -7,8 +7,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
   getMaxNumber?: (value: number) => void,
   getStartNumber?: (value: number) => void,
   onEnter?: () => void
-  error?: string
-  spanClassName?: string
+  spanClassName?: string,
 }
 
 const SuperInput: React.FC<SuperInputTextPropsType> = (
@@ -19,18 +18,23 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     getStartNumber,
     onKeyPress,
     onEnter,
-    error,
     className,
     spanClassName,
 
     ...restProps
   }
 ) => {
-  const onChangeCallback = (e: any) => {
-    onChange
-    && onChange(e)
 
-    if (e.currentTarget.value < 0) return error;
+  const [red, setRed] = useState<boolean>(false)
+
+  const onChangeCallback = (e: any) => {
+    if (e.currentTarget.value < 0) {
+      setRed(true)
+    } else {
+      setRed(false)
+    }
+    onChange && onChange(e)
+    console.log(red)
     getMaxNumber && getMaxNumber(e.currentTarget.value)
     getStartNumber && getStartNumber(e.currentTarget.value)
   }
@@ -42,8 +46,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     && onEnter()
   }
 
-  const finalSpanClassName = `${s.error} ${spanClassName ? spanClassName : ''}`
-  const finalInputClassName = `${error ? s.errorInput : s.superInput} ${className}`
+  const finalInputClassName = `${red ? s.errorInput : s.superInput} ${className}`
 
   return (
     <>
@@ -55,7 +58,6 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
 
         {...restProps}
       />
-      {error && <span className={finalSpanClassName}>{error}</span>}
     </>
   )
 }
