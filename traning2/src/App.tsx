@@ -10,7 +10,7 @@ export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
 
 const INCORRECT_VALUE_MESSAGE: string = "Incorrect value, must be > 0";
-const INCORRECT_MAX_VALUE_MESSAGE: string = "Incorrect value, must be > start value";
+export const INCORRECT_MAX_VALUE_MESSAGE: string = "Incorrect value, must be > start value";
 const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
 const COUNT_TICK: number = 1;
 
@@ -55,21 +55,22 @@ function App() {
     } else {
       setError(true);
     }
-  }
+  };
   const onResetHandler: OnResetHandler = () => {
     getLocalStorage();
     setError(false);
     setMessage("");
-  }
+  };
   const getMaxNumber = (value: number) => {
     if (value <= startValue) {
       setError(true)
       setMessage(INCORRECT_MAX_VALUE_MESSAGE);
     } else {
       setError(false)
+      setMessage(ENTER_VALUE_MESSAGE);
       setMaxValue(value);
     }
-  }
+  };
   const getStartNumber = (value: number) => {
     if (value < 0) {
       setError(true)
@@ -78,11 +79,10 @@ function App() {
       setError(false)
       setStartValue(value);
     }
-  }
+  };
   const onInputFocus = () => {
     setMessage(ENTER_VALUE_MESSAGE)
-  }
-
+  };
   const setDisabledButton = (value: boolean) => setDisableBtn(value);
 
   return (
@@ -105,6 +105,7 @@ function App() {
           <div className="counter-control__item">
             <label>Max value:</label>
             <SuperInputText
+              message={message}
               defaultValue={getLocalStorageMaxValue()}
               getMaxNumber={getMaxNumber}
               onFocus={onInputFocus}
@@ -114,6 +115,7 @@ function App() {
           <div className="counter-control__item">
             <label>Start value:</label>
             <SuperInputText
+              message={message}
               defaultValue={getLocalStorageStartValue()}
               getStartNumber={getStartNumber}
               onFocus={onInputFocus}
