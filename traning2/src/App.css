@@ -51,7 +51,7 @@ body {
 .screenMessage {
   display: block;
   vertical-align: center;
-  color: red;
+  color: #44a4c2;
   font-size: 28px;
 }
 
