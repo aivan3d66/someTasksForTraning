@@ -44,7 +44,7 @@ function App() {
     getLocalStorage()
   }, [])
 
-  console.log(counter);
+  console.log(startValue);
   console.log(maxValue);
 
   const onIncrementHandler: OnIncrementHandler = () => {
