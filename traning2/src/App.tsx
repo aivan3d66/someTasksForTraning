@@ -60,9 +60,14 @@ function App() {
     setError(false);
     setMessage("");
   }
-
   const getMaxNumber = (value: number) => {
-    setMaxValue(value);
+    if (value <= startValue) {
+      setError(true)
+      setMessage(INCORRECT_MAX_VALUE_MESSAGE);
+    } else {
+      setError(false)
+      setMaxValue(value);
+    }
   }
 
   const getStartNumber = (value: number) => {
