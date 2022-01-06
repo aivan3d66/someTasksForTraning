@@ -78,6 +78,16 @@ function App() {
       setStartValue(value);
     }
   }
+  const onInputFocus = () => {
+    setMessage(ENTER_VALUE_MESSAGE)
+  }
+
+  const setDisableSetBtn = () => {
+    let valueStart = restoreCounter("counter-start-value", startValue);
+    let valueMax = restoreCounter("counter-max-value", maxValue);
+
+    return maxValue === valueMax && startValue === valueStart || error;
+  }
 
   return (
     <div className="App">
