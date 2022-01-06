@@ -21,10 +21,13 @@ function App() {
   const [maxValue, setMaxValue] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
 
+  const [disableBtn, setDisableBtn] = useState<boolean>(true)
+
   const setLocalStorage = () => {
     saveCounter("counter-max-value", maxValue)
     saveCounter("counter-start-value", startValue)
     setMessage("")
+    setDisableBtn(true);
   }
   const getLocalStorage = () => {
     let valueStart = restoreCounter("counter-start-value", startValue);
@@ -42,7 +45,7 @@ function App() {
 
   useEffect(() => {
     getLocalStorage()
-  }, [])
+  }, [setStartValue, setMaxValue])
 
   console.log(startValue);
   console.log(maxValue);
@@ -82,12 +85,7 @@ function App() {
     setMessage(ENTER_VALUE_MESSAGE)
   }
 
-  const setDisableSetBtn = () => {
-    let valueStart = restoreCounter("counter-start-value", startValue);
-    let valueMax = restoreCounter("counter-max-value", maxValue);
-
-    return maxValue === valueMax && startValue === valueStart || error;
-  }
+  const setDisabledButton = (value: boolean) => setDisableBtn(value);
 
   return (
     <div className="App">
@@ -112,6 +110,7 @@ function App() {
               defaultValue={getLocalStorageMaxValue()}
               getMaxNumber={getMaxNumber}
               onFocus={onInputFocus}
+              setDisabledButton={setDisabledButton}
             />
           </div>
           <div className="counter-control__item">
@@ -120,13 +119,14 @@ function App() {
               defaultValue={getLocalStorageStartValue()}
               getStartNumber={getStartNumber}
               onFocus={onInputFocus}
+              setDisabledButton={setDisabledButton}
             />
           </div>
         </div>
         <div className="counter-control__btn">
           <SuperButton
             onClick={setLocalStorage}
-            disabled={setDisableSetBtn()}
+            disabled={disableBtn}
           >
             Set
           </SuperButton>
