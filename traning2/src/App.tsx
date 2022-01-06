@@ -23,14 +23,15 @@ function App() {
 
   const setLocalStorage = () => {
     saveCounter("counter-max-value", maxValue)
-    saveCounter("counter-start-value", counter)
+    saveCounter("counter-start-value", startValue)
+    setMessage("")
   }
   const getLocalStorage = () => {
-    let valueStart = restoreCounter("counter-start-value", counter);
-    setCounter(Number(valueStart))
+    let valueStart = restoreCounter("counter-start-value", startValue);
+    setStartValue(valueStart);
 
     let valueMax = restoreCounter("counter-max-value", maxValue);
-    setMaxValue(Number(valueMax))
+    setMaxValue(valueMax);
   }
   const getLocalStorageStartValue = () => {
     return restoreCounter("counter-start-value", startValue);
