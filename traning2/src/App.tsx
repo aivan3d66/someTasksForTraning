@@ -69,9 +69,14 @@ function App() {
       setMaxValue(value);
     }
   }
-
   const getStartNumber = (value: number) => {
-    setCounter(value);
+    if (value < 0) {
+      setError(true)
+      setMessage(INCORRECT_VALUE_MESSAGE)
+    } else {
+      setError(false)
+      setStartValue(value);
+    }
   }
 
   return (
