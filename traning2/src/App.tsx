@@ -9,7 +9,6 @@ import {restoreCounter, saveCounter} from "./components/localStorage";
 export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
 
-const ERROR_MESSAGE: string = "Max counter value";
 const INCORRECT_VALUE_MESSAGE: string = "Incorrect value, must be > 0";
 const INCORRECT_MAX_VALUE_MESSAGE: string = "Incorrect value, must be > start value";
 const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
@@ -54,8 +53,7 @@ function App() {
     if (startValue < maxValue) {
       setStartValue(+startValue + COUNT_TICK);
     } else {
-      setError(!error);
-      setMessage(ERROR_MESSAGE);
+      setError(true);
     }
   }
   const onResetHandler: OnResetHandler = () => {
