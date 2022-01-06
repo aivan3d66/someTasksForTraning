@@ -8,6 +8,7 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
   getStartNumber?: (value: number) => void,
   onEnter?: () => void
   spanClassName?: string,
+  setDisabledButton: (value: boolean) => void
 }
 
 const SuperInput: React.FC<SuperInputTextPropsType> = (
@@ -20,7 +21,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     onEnter,
     className,
     spanClassName,
-
+    setDisabledButton,
     ...restProps
   }
 ) => {
@@ -33,8 +34,10 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     } else {
       setRed(false)
     }
+    setDisabledButton(false)
+
     onChange && onChange(e)
-    console.log(red)
+
     getMaxNumber && getMaxNumber(e.currentTarget.value)
     getStartNumber && getStartNumber(e.currentTarget.value)
   }
