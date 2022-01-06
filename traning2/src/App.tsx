@@ -16,9 +16,10 @@ const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
 const COUNT_TICK: number = 1;
 
 function App() {
-  const [error, setError] = useState<string>("");
-  const [counter, setCounter] = useState<number>(0);
+  const [error, setError] = useState<boolean>(false);
+  const [startValue, setStartValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(0);
+  const [message, setMessage] = useState<string>("");
 
   const setLocalStorage = () => {
     saveCounter("counter-max-value", maxValue)
