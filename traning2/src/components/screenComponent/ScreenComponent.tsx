@@ -17,8 +17,7 @@ export const ScreenComponent: React.FC<ScreenComponentProps> = (
 
   return (
     <div className={finalClassName}>
-      {message ? <span className="screenMessage">{message}</span>  : counter}
-      {error && <div className="errorName">{error}</div>}
+      {message ? <span className="screenMessage">{message}</span> : counter}
     </div>
   )
 }
