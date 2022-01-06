@@ -5,7 +5,7 @@ import {OnIncrementHandler, OnResetHandler} from "../../App";
 type ControlButtonsProps = {
   onIncrementHandler: OnIncrementHandler,
   onResetHandler: OnResetHandler,
-  error: string,
+  error: boolean,
   counter: number
 }
 
@@ -22,7 +22,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = (
     <div className="btnWrapper">
       <SuperButton
         onClick={onIncrementHandler}
-        disabled={!!error}
+        disabled={error}
       >
         inc
       </SuperButton>
