@@ -55,10 +55,10 @@ function App() {
       setMessage(ERROR_MESSAGE);
     }
   }
-
   const onResetHandler: OnResetHandler = () => {
     getLocalStorage();
-    setError("")
+    setError(false);
+    setMessage("");
   }
 
   const getMaxNumber = (value: number) => {
