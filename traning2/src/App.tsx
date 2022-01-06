@@ -48,10 +48,11 @@ function App() {
   console.log(maxValue);
 
   const onIncrementHandler: OnIncrementHandler = () => {
-    if (counter < maxValue) {
-      setCounter(Number(counter) + COUNT_TICK);
+    if (startValue < maxValue) {
+      setStartValue(+startValue + COUNT_TICK);
     } else {
-      setError(ERROR_MESSAGE);
+      setError(!error);
+      setMessage(ERROR_MESSAGE);
     }
   }
 
