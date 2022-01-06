@@ -48,6 +48,13 @@ body {
   border: 3px solid #44a4c2;
 }
 
+.screenMessage {
+  display: block;
+  vertical-align: center;
+  color: red;
+  font-size: 28px;
+}
+
 .screenContentRed {
   width: auto;
   height: 100px;
@@ -56,8 +63,6 @@ body {
   font-size: 70px;
   text-align: center;
 
-  color: white;
-  background-color: rgba(128, 0, 0, 1);
   border: 3px solid rgba(255, 0, 0, 1);
   border-radius: 10px;
 }
@@ -111,8 +116,6 @@ body {
 .counter-control__item input {
   width: 90px;
   margin:  0;
-  text-align: center;
-  border: 3px solid #44a4c2;
 }
 
 .counter-control button {
