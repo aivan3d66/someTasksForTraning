@@ -6,47 +6,44 @@ import UncontrolledRating from "./components/UncontrolledRating/UncontrolledRati
 import Accordion from './components/Accordion/Accordion';
 import {OnOff} from "./components/OnOff/OnOff";
 
+export type ItemsType = {
+  title: string,
+  value: any,
+}
+
 export type PropsType = {
   title?: string,
   value?: number,
-  collapsed?: boolean,
+  collapsed: boolean,
   onChange?: () => void,
   onClick?: () => void,
-  /**
-   * Elements are showed when accordion is opened (not collapsed)
-   */
-  items?: Array<any>,
+  items?: Array<ItemsType>,
 }
 
-export const itemsList = [
+export const items = [
   {title: 'John', value: 1},
   {title: 'Rick', value: 2},
   {title: 'Morty', value: 3},
   {title: 'Geralt', value: 4},
 ];
 
-function PageTitle(props: PropsType) {
-  console.log("AppTitle rendering");
-  return <h1 className="app__title">{props.title}</h1>
-}
-
 function App() {
-  const [collapseAcc, setCollapseAcc] = useState(false);
-
-  const onChange = () => setCollapseAcc(!collapseAcc);
+  const [collapsed, setCollapseAcc] = useState(false);
+  const onChange = () => setCollapseAcc(!collapsed);
 
   console.log("App rendering");
   return (
     <div className="app__content">
-      <PageTitle title={"William Shakespeare works"}/>
+      <h1 title={"William Shakespeare works"}/>
       <UncontrolledAccordion/>
       <UncontrolledRating/>
       <UncontrolledOnOff/>
       <br/>
       <hr/>
       <Accordion
+        items={items}
         title={"Controlled title"}
-        collapsed={collapseAcc}
+        collapsed={collapsed}
         onChange={onChange}
       />
       <OnOff on={true}/>
@@ -58,3 +55,40 @@ function App() {
 }
 
 export default App;
+
+// export type ItemsType = {
+//   title: string,
+//   value: any,
+// }
+//
+// export type PropsType = {
+//   title?: string,
+//   value?: number,
+//   collapsed?: boolean,
+//   onChange?: () => void,
+//   onClick?: () => void,
+//   items?: Array<ItemsType>,
+// }
+//
+// const items = [
+//   {title: 'John', value: 1},
+//   {title: 'Rick', value: 2},
+//   {title: 'Morty', value: 3},
+//   {title: 'Geralt', value: 4},
+// ];
+//
+// function App() {
+//   const [collapsed, setCollapseAcc] = useState(false);
+//   const onChange = () => setCollapseAcc(!collapsed);
+//
+//   return (
+//     <div className="app__content">
+//       <Accordion
+//         items={items}
+//         title={"Controlled title"}
+//         collapsed={collapsed}
+//         onChange={onChange}
+//       />
+//     </div>
+//   );
+// }
