@@ -1,17 +1,22 @@
-import {PropsType} from "../../App";
+import {ItemsType, PropsType} from "../../App";
 
-function Accordion(props: PropsType) {
-  console.log("Accordion rendering");
+type AccordionPropsType = {
+  title: string,
+  collapsed: boolean,
+  items: Array<ItemsType>,
+  onChange: () => void,
+}
+
+function Accordion(props: any) {
   return (
     <div className="accordion">
       <AccordionTitle title={props.title} onChange={props.onChange}/>
-      {!props.collapsed && <AccordionBody/>}
+      {!props.collapsed && <AccordionBody items={props.items}/>}
     </div>
   )
 }
 
-export function AccordionTitle(props: PropsType) {
-  console.log("AccordionTitle rendering");
+export function AccordionTitle(props: any) {
   return (
     <h3 className="accordion__title"
         onClick={props.onChange}
@@ -21,34 +26,11 @@ export function AccordionTitle(props: PropsType) {
   )
 }
 
-
-export function AccordionBody() {
-  console.log("AccordionBody rendering");
+export function AccordionBody(props: any) {
   return (
-    <div className="accordion__items">
-      <p className="accordion__item">
-        The other two, slight air and purging fire,<br/>
-        Are both with thee, wherever I abide;<br/>
-        The first my thought, the other my desire,<br/>
-        These present-absent with swift motion slide.<br/>
-      </p>
-      <p className="accordion__item">
-        For when these quicker elements are gone<br/>
-        In tender embassy of love to thee,<br/>
-        My life, being made of four, with two alone<br/>
-        Sinks down to death, oppress'd with melancholy;<br/>
-      </p>
-      <p className="accordion__item">
-        Until life's composition be recured<br/>
-        By those swift messengers return'd from thee,<br/>
-        Who even but now come back again, assured<br/>
-        Of thy fair health, recounting it to me:<br/>
-      </p>
-      <p className="accordion__item">
-        This told, I joy; but then no longer glad,<br/>
-        I send them back again and straight grow sad.<br/>
-      </p>
-    </div>
+    <ul className="accordion__items">
+      {props.items.map((i: any) => <li>{i.title}</li>)}
+    </ul>
   )
 }
 
