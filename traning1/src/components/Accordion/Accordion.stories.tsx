@@ -12,7 +12,7 @@ export default {
 const callback = action("Accordion mode change event fired");
 const onClickCallback = action("Some item was clicked");
 
-const Template: Story<PropsType> = (args) => <Accordion {...args}/>;
+const Template: Story<any> = (args) => <Accordion {...args}/>;
 
 const callbacksProps = {
   onChange: callback,
@@ -39,7 +39,7 @@ UserUnCollapsedMode.args = {
 }
 
 
-export const ModeChanging: Story<PropsType> = (args) => {
+export const ModeChanging: Story<any> = (args) => {
   const [value, setValue] = useState(true);
   return <Accordion title={"William Shakespeare works"}
                     collapsed={value}
