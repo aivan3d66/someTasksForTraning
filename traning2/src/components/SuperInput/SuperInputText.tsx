@@ -1,5 +1,5 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent, useState} from 'react'
-import { INCORRECT_MAX_VALUE_MESSAGE } from '../../App'
+import {INCORRECT_MAX_VALUE_MESSAGE, INCORRECT_START_VALUE_MESSAGE} from '../../App'
 import s from './SuperInputText.module.css'
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -54,7 +54,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
   }
 
   const finalInputClassName = `${red ? s.errorInput : s.superInput} ${className}`
-  const redBorderClassName = message === INCORRECT_MAX_VALUE_MESSAGE ? s.errorInput : finalInputClassName;
+  const redBorderClassName = message === INCORRECT_MAX_VALUE_MESSAGE || message === INCORRECT_START_VALUE_MESSAGE ? s.errorInput : finalInputClassName;
 
   return (
     <>
