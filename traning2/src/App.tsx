@@ -57,23 +57,23 @@ function App() {
     setError(false);
     setMessage("");
   };
-  const getMaxNumber = (value: number) => {
-    if (value <= startValue) {
+  const getMaxNumber = (value: string) => {
+    if (+value <= startValue) {
       setError(true)
       setMessage(INCORRECT_MAX_VALUE_MESSAGE);
     } else {
       setError(false)
       setMessage(ENTER_VALUE_MESSAGE);
-      setMaxValue(value);
+      setMaxValue(+value);
     }
   };
-  const getStartNumber = (value: number) => {
-    if (value < 0) {
+  const getStartNumber = (value: string) => {
+    if (+value < 0) {
       setError(true)
       setMessage(INCORRECT_VALUE_MESSAGE)
     } else {
       setError(false)
-      setStartValue(value);
+      setStartValue(+value);
     }
   };
   const onInputFocus = () => {

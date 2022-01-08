@@ -5,8 +5,8 @@ import s from './SuperInputText.module.css'
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 type SuperInputTextPropsType = DefaultInputPropsType & {
-  getMaxNumber?: (value: number) => void,
-  getStartNumber?: (value: number) => void,
+  getMaxNumber?: (value: string) => void,
+  getStartNumber?: (value: string) => void,
   onEnter?: () => void
   spanClassName?: string,
   setDisabledButton: (value: boolean) => void,
@@ -31,9 +31,9 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
 
   const [red, setRed] = useState<boolean>(false)
 
-  const onChangeCallback = (e: any) => {
+  const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
     setDisabledButton(false)
-    if (e.currentTarget.value < 0) {
+    if (e.currentTarget.value < '0') {
       setRed(true)
       setDisabledButton(true)
     } else {
