@@ -19,7 +19,6 @@ function App() {
   const [startValue, setStartValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
-
   const [disableBtn, setDisableBtn] = useState<boolean>(true)
 
   const setLocalStorage = () => {
@@ -45,9 +44,6 @@ function App() {
   useEffect(() => {
     getLocalStorage()
   }, [setStartValue, setMaxValue])
-
-  console.log(startValue);
-  console.log(maxValue);
 
   const onIncrementHandler: OnIncrementHandler = () => {
     if (startValue < maxValue) {
