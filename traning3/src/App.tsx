@@ -18,13 +18,15 @@ function App() {
   const [startValue, setStartValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(0);
   const [message, setMessage] = useState<string>("");
-  const [disableBtn, setDisableBtn] = useState<boolean>(true)
+  const [disableBtn, setDisableBtn] = useState<boolean>(true);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   const setLocalStorage = () => {
     saveCounter("counter-max-value", maxValue)
     saveCounter("counter-start-value", startValue)
     setMessage("")
     setDisableBtn(true);
+    setEditMode(false);
   }
   const getLocalStorage = () => {
     let valueStart = restoreCounter("counter-start-value", startValue);
@@ -83,27 +85,32 @@ function App() {
     setMessage(ENTER_VALUE_MESSAGE)
   };
   const setDisabledButton = (value: boolean) => setDisableBtn(value);
+  const setEditModeButton = (value: boolean) => setEditMode(value);
 
   return (
     <div className="App">
-      <CounterScreen
-        startValue={startValue}
-        error={error}
-        message={message}
-        onIncrementHandler={onIncrementHandler}
-        onResetHandler={onResetHandler}
-      />
-      <Controller
-        message={message}
-        getLocalStorageMaxValue={getLocalStorageMaxValue}
-        getLocalStorageStartValue={getLocalStorageStartValue}
-        getMaxNumber={getMaxNumber}
-        onInputFocus={onInputFocus}
-        setDisabledButton={setDisabledButton}
-        getStartNumber={getStartNumber}
-        setLocalStorage={setLocalStorage}
-        disableBtn={disableBtn}
-      />
+      {
+        !editMode
+          ? <CounterScreen
+            startValue={startValue}
+            error={error}
+            message={message}
+            onIncrementHandler={onIncrementHandler}
+            onResetHandler={onResetHandler}
+            setEditModeButton={setEditModeButton}
+          />
+          : <Controller
+            message={message}
+            getLocalStorageMaxValue={getLocalStorageMaxValue}
+            getLocalStorageStartValue={getLocalStorageStartValue}
+            getMaxNumber={getMaxNumber}
+            onInputFocus={onInputFocus}
+            setDisabledButton={setDisabledButton}
+            getStartNumber={getStartNumber}
+            setLocalStorage={setLocalStorage}
+            disableBtn={disableBtn}
+          />
+      }
     </div>
   );
 }

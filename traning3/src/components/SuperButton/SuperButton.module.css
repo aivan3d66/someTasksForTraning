@@ -1,0 +1,48 @@
+.default {
+  min-width: 80px;
+  padding: 4px;
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: bold;
+  color: #292c35;
+  border-radius: 5px;
+  border: 1px solid rgba(52, 152, 192, 1);
+  background-color: rgba(52, 152, 192, 1);
+  cursor: pointer;
+}
+
+.default:hover{
+  color: #000000;
+  transition: 0.3s;
+  background-color: rgba(220, 220, 220, 0.8);
+}
+
+.default:disabled {
+  opacity: 0.5;
+}
+
+.default:disabled:hover,
+.default:disabled:focus {
+  color: white;
+  border: 1px solid rgba(52, 152, 192, 1);
+  background-color: rgba(52, 152, 192, 1);
+}
+
+.red {
+  min-width: 30px;
+  padding: 4px;
+  margin: 0;
+  color: white;
+  background: red;
+  border-radius: 5px;
+  border: 1px solid red;
+  cursor: pointer;
+}
+
+.red:hover,
+.red:focus {
+  color: #000000;
+  transition: 0.5s;
+  background-color: rgba(220, 220, 220, 0.8);
+}
