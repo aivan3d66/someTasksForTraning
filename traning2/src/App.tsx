@@ -9,6 +9,7 @@ export type OnResetHandler = () => void;
 
 const INCORRECT_VALUE_MESSAGE: string = "Incorrect value, must be > 0";
 export const INCORRECT_MAX_VALUE_MESSAGE: string = "Incorrect value, must be > start value";
+export const INCORRECT_START_VALUE_MESSAGE: string = "Incorrect value, must be < max value";
 const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
 const COUNT_TICK: number = 1;
 
@@ -69,6 +70,9 @@ function App() {
     if (+value < 0) {
       setError(true)
       setMessage(INCORRECT_VALUE_MESSAGE)
+    } else if (+value >= maxValue) {
+      setError(true)
+      setMessage(INCORRECT_START_VALUE_MESSAGE)
     } else {
       setError(false)
       setMessage(ENTER_VALUE_MESSAGE);
@@ -100,7 +104,6 @@ function App() {
         setLocalStorage={setLocalStorage}
         disableBtn={disableBtn}
       />
-
     </div>
   );
 }
