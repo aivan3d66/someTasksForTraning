@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {ControlButtons} from "./components/controlComponent/ControlButtons";
-import {ScreenComponent} from "./components/screenComponent/ScreenComponent";
+import {ControlButtons} from "./components/ControlComponent/ControlButtons";
+import {ScreenComponent} from "./components/ScreenComponent/ScreenComponent";
 import SuperInputText from "./components/SuperInput/SuperInputText";
 import SuperButton from "./components/SuperButton/SuperButton";
 import {restoreCounter, saveCounter} from "./components/localStorage";
@@ -73,6 +73,7 @@ function App() {
       setMessage(INCORRECT_VALUE_MESSAGE)
     } else {
       setError(false)
+      setMessage(ENTER_VALUE_MESSAGE);
       setStartValue(+value);
     }
   };
