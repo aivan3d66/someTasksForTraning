@@ -4,14 +4,14 @@ import React from "react";
 
 type ControllerPropsType = {
   message: string,
-  getLocalStorageMaxValue: any,
+  getLocalStorageMaxValue: () => string | number | undefined,
   getLocalStorageStartValue: any,
-  getMaxNumber: any,
-  onInputFocus: any,
-  setDisabledButton: any,
-  getStartNumber: any,
-  setLocalStorage: any,
-  disableBtn: any,
+  getMaxNumber: (value: string) => void,
+  onInputFocus: () => void,
+  setDisabledButton: (value: boolean) => void,
+  getStartNumber: (value: string) => void,
+  setLocalStorage: () => void,
+  disableBtn: boolean,
 }
 
 export const Controller: React.FC<ControllerPropsType> = (
