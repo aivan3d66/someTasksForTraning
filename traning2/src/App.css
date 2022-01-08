@@ -15,7 +15,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  width: 800px;
+  width: 400px;
   margin: 60px auto;
   padding: 0;
 
@@ -25,8 +25,8 @@ body {
 
 .counter-interface {
   position: relative;
-  width: 300px;
-  margin: 0;
+  width: 400px;
+  margin: 0 0 50px;
   padding: 0;
   height: 290px;
 
@@ -84,7 +84,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 300px;
+  width: 400px;
   margin: 0;
   padding: 20px;
   height: 250px;
