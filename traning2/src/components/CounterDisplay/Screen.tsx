@@ -1,14 +1,14 @@
 import React from "react";
 
 type ScreenComponentProps = {
-  counter: number,
+  startValue: number,
   error: boolean,
   message: string,
 }
 
-export const ScreenComponent: React.FC<ScreenComponentProps> = (
+export const Screen: React.FC<ScreenComponentProps> = (
   {
-    counter,
+    startValue,
     error,
     message
   }
@@ -17,7 +17,7 @@ export const ScreenComponent: React.FC<ScreenComponentProps> = (
 
   return (
     <div className={finalClassName}>
-      {message ? <span className="screenMessage">{message}</span> : counter}
+      {message ? <span className="screenMessage">{message}</span> : startValue}
     </div>
   )
 }

@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {ControlButtons} from "./components/ControlComponent/ControlButtons";
-import {ScreenComponent} from "./components/ScreenComponent/ScreenComponent";
-import SuperInputText from "./components/SuperInput/SuperInputText";
-import SuperButton from "./components/SuperButton/SuperButton";
 import {restoreCounter, saveCounter} from "./components/localStorage";
+import {CounterScreen} from "./components/CounterDisplay/CounterScreen";
+import {Controller} from "./components/CounterController/Controller";
 
 export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
@@ -84,51 +82,25 @@ function App() {
 
   return (
     <div className="App">
-      <div className="counter-interface">
-        <ScreenComponent
-          counter={startValue}
-          error={error}
-          message={message}
-        />
-        <ControlButtons
-          error={error}
-          onIncrementHandler={onIncrementHandler}
-          onResetHandler={onResetHandler}
-          counter={startValue}
-        />
-      </div>
-      <div className="counter-control">
-        <div className="counter-control__list">
-          <div className="counter-control__item">
-            <label>Max value:</label>
-            <SuperInputText
-              message={message}
-              defaultValue={getLocalStorageMaxValue()}
-              getMaxNumber={getMaxNumber}
-              onFocus={onInputFocus}
-              setDisabledButton={setDisabledButton}
-            />
-          </div>
-          <div className="counter-control__item">
-            <label>Start value:</label>
-            <SuperInputText
-              message={message}
-              defaultValue={getLocalStorageStartValue()}
-              getStartNumber={getStartNumber}
-              onFocus={onInputFocus}
-              setDisabledButton={setDisabledButton}
-            />
-          </div>
-        </div>
-        <div className="counter-control__btn">
-          <SuperButton
-            onClick={setLocalStorage}
-            disabled={disableBtn}
-          >
-            Set
-          </SuperButton>
-        </div>
-      </div>
+      <CounterScreen
+        startValue={startValue}
+        error={error}
+        message={message}
+        onIncrementHandler={onIncrementHandler}
+        onResetHandler={onResetHandler}
+      />
+      <Controller
+        message={message}
+        getLocalStorageMaxValue={getLocalStorageMaxValue}
+        getLocalStorageStartValue={getLocalStorageStartValue}
+        getMaxNumber={getMaxNumber}
+        onInputFocus={onInputFocus}
+        setDisabledButton={setDisabledButton}
+        getStartNumber={getStartNumber}
+        setLocalStorage={setLocalStorage}
+        disableBtn={disableBtn}
+      />
+
     </div>
   );
 }

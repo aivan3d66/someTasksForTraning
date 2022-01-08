@@ -6,7 +6,7 @@ type ControlButtonsProps = {
   onIncrementHandler: OnIncrementHandler,
   onResetHandler: OnResetHandler,
   error: boolean,
-  counter: number
+  startValue: number
 }
 
 export const ControlButtons: React.FC<ControlButtonsProps> = (
@@ -14,7 +14,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = (
     onIncrementHandler,
     onResetHandler,
     error,
-    counter
+    startValue
   }
 ) => {
 
@@ -28,7 +28,7 @@ export const ControlButtons: React.FC<ControlButtonsProps> = (
       </SuperButton>
       <SuperButton
         onClick={onResetHandler}
-        disabled={counter === 0}
+        disabled={startValue === 0}
       >
         reset
       </SuperButton>
