@@ -1,4 +1,9 @@
-import {ItemsType, PropsType} from "../../App";
+import React from "react";
+
+type ItemsType = {
+  title: string,
+  value: number
+}
 
 type AccordionPropsType = {
   title: string,
@@ -7,16 +12,28 @@ type AccordionPropsType = {
   onChange: () => void,
 }
 
-function Accordion(props: any) {
+export const Accordion: React.FC<AccordionPropsType> = (
+  {
+    title,
+    onChange,
+    collapsed,
+    items
+  }
+) => {
+
   return (
     <div className="accordion">
-      <AccordionTitle title={props.title} onChange={props.onChange}/>
-      {!props.collapsed && <AccordionBody items={props.items}/>}
+      <AccordionTitle title={title} onChange={onChange}/>
+      {!collapsed && <AccordionBody items={items}/>}
     </div>
   )
 }
+type AccordionTitlePropsType = {
+  onChange: () => void,
+  title: string
+}
 
-export function AccordionTitle(props: any) {
+export const AccordionTitle = (props: AccordionTitlePropsType) => {
   return (
     <h3 className="accordion__title"
         onClick={props.onChange}
@@ -26,7 +43,12 @@ export function AccordionTitle(props: any) {
   )
 }
 
-export function AccordionBody(props: any) {
+type AccordionBodyPropsType = {
+  items: Array<ItemsType>
+}
+
+export function AccordionBody(props: AccordionBodyPropsType) {
+
   return (
     <ul className="accordion__items">
       {props.items.map((i: any) => <li>{i.title}</li>)}

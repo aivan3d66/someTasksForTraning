@@ -1,14 +1,13 @@
-import {ItemsType} from "../../App";
 import s from "./Select.module.css";
 import {useState, KeyboardEvent, useEffect} from "react";
 
 type SelectInputType = {
   value?: any,
   onChange: (value: any) => void,
-  items: Array<ItemsType>
+  items: any
 }
 
-export const SelectInput = (props: SelectInputType) => {
+export const SelectInput = (props: any) => {
   const [active, setActive] = useState<boolean>(false);
   const [hoveredElement, setHoveredElement] = useState<any>(props.value);
 
@@ -18,8 +17,8 @@ export const SelectInput = (props: SelectInputType) => {
     toggleItems();
   }
 
-  const selectedItem = props.items.find(i => i.value === props.value);
-  const hoveredItem = props.items.find(i => i.value === hoveredElement);
+  const selectedItem = props.items.find((i: any) => i.value === props.value);
+  const hoveredItem = props.items.find((i: any) => i.value === hoveredElement);
 
   useEffect(() => {
     setHoveredElement(props.value)

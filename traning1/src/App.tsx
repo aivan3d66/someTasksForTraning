@@ -6,21 +6,8 @@ import UncontrolledRating from "./components/UncontrolledRating/UncontrolledRati
 import Accordion from './components/Accordion/Accordion';
 import {OnOff} from "./components/OnOff/OnOff";
 
-export type ItemsType = {
-  title: string,
-  value: any,
-}
 
-export type PropsType = {
-  title?: string,
-  value?: number,
-  collapsed: boolean,
-  onChange?: () => void,
-  onClick?: () => void,
-  items?: Array<ItemsType>,
-}
-
-export const items = [
+const items = [
   {title: 'John', value: 1},
   {title: 'Rick', value: 2},
   {title: 'Morty', value: 3},
@@ -28,14 +15,13 @@ export const items = [
 ];
 
 function App() {
-  const [collapsed, setCollapseAcc] = useState(false);
+  const [collapsed, setCollapseAcc] = useState<boolean>(false);
   const onChange = () => setCollapseAcc(!collapsed);
 
-  console.log("App rendering");
   return (
     <div className="app__content">
       <h1 title={"William Shakespeare works"}/>
-      <UncontrolledAccordion/>
+      <UncontrolledAccordion items={items}/>
       <UncontrolledRating/>
       <UncontrolledOnOff/>
       <br/>
