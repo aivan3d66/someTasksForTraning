@@ -7,9 +7,9 @@ import {Controller} from "./components/CounterController/Controller";
 export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
 
-const INCORRECT_VALUE_MESSAGE: string = "Incorrect value, must be > 0";
 export const INCORRECT_MAX_VALUE_MESSAGE: string = "Incorrect value, must be > start value";
 export const INCORRECT_START_VALUE_MESSAGE: string = "Incorrect value, must be < max value";
+const INCORRECT_VALUE_MESSAGE: string = "Incorrect value, must be > 0";
 const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
 const COUNT_TICK: number = 1;
 
@@ -94,7 +94,9 @@ function App() {
         onResetHandler={onResetHandler}
       />
       <Controller
+        startValue={startValue}
         message={message}
+        maxValue={maxValue}
         getLocalStorageMaxValue={getLocalStorageMaxValue}
         getLocalStorageStartValue={getLocalStorageStartValue}
         getMaxNumber={getMaxNumber}
