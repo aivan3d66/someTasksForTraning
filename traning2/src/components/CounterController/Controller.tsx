@@ -1,15 +1,15 @@
 import SuperInputText from "../SuperInput/SuperInputText";
 import SuperButton from "../SuperButton/SuperButton";
-import React from "react";
+import React, {ChangeEvent} from "react";
 
 type ControllerPropsType = {
   message: string,
   getLocalStorageMaxValue: () => string | number | undefined,
   getLocalStorageStartValue: any,
-  getMaxNumber: (value: string) => void,
+  getMaxNumber: (value: number) => void,
+  getStartNumber: (value: number) => void,
   onInputFocus: () => void,
   setDisabledButton: (value: boolean) => void,
-  getStartNumber: (value: string) => void,
   setLocalStorage: () => void,
   disableBtn: boolean,
   startValue: number,
@@ -31,6 +31,14 @@ export const Controller: React.FC<ControllerPropsType> = (
     maxValue
   }
 ) => {
+  const onStartNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    getStartNumber(+e.currentTarget.value)
+  }
+
+  const onMaxNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    getMaxNumber(+e.currentTarget.value)
+  }
+
   return (
     <div className="counter-control">
       <div className="counter-control__list">
@@ -41,7 +49,7 @@ export const Controller: React.FC<ControllerPropsType> = (
             maxValue={maxValue}
             message={message}
             defaultValue={getLocalStorageMaxValue()}
-            getMaxNumber={getMaxNumber}
+            onChange={onMaxNumberHandler}
             onFocus={onInputFocus}
             setDisabledButton={setDisabledButton}
           />
@@ -53,8 +61,7 @@ export const Controller: React.FC<ControllerPropsType> = (
             startValue={startValue}
             maxValue={maxValue}
             defaultValue={getLocalStorageStartValue()}
-            getStartNumber={getStartNumber}
-            getMaxNumber={getMaxNumber}
+            onChange={onStartNumberHandler}
             onFocus={onInputFocus}
             setDisabledButton={setDisabledButton}
           />
