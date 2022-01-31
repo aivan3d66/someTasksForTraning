@@ -10,7 +10,9 @@ type SuperInputTextPropsType = DefaultInputPropsType & {
   onEnter?: () => void
   spanClassName?: string,
   setDisabledButton: (value: boolean) => void,
-  message: string
+  message: string,
+  startValue: number,
+  maxValue: number
 }
 
 const SuperInput: React.FC<SuperInputTextPropsType> = (
@@ -25,6 +27,8 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     spanClassName,
     setDisabledButton,
     message,
+    startValue,
+    maxValue,
     ...restProps
   }
 ) => {
@@ -33,17 +37,21 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
 
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
     setDisabledButton(false)
-    if (e.currentTarget.value < '0') {
+    if (+e.currentTarget.value < 0) {
       setRed(true)
       setDisabledButton(true)
+    } else if (startValue >= maxValue) {
+      setRed(true)
+      setDisabledButton(true)
+    } else if (startValue < maxValue) {
+      setRed(false)
+      setDisabledButton(true)
     } else {
+      setDisabledButton(false)
       setRed(false)
     }
 
     onChange && onChange(e)
-
-    getMaxNumber && getMaxNumber(e.currentTarget.value)
-    getStartNumber && getStartNumber(e.currentTarget.value)
   }
   const onKeyPressCallback = (e: KeyboardEvent<HTMLInputElement>) => {
     onKeyPress && onKeyPress(e);

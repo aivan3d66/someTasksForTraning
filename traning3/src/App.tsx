@@ -48,7 +48,7 @@ function App() {
 
   const onIncrementHandler: OnIncrementHandler = () => {
     if (startValue < maxValue) {
-      setStartValue(+startValue + COUNT_TICK);
+      setStartValue(startValue + COUNT_TICK);
     } else {
       setError(true);
     }
@@ -58,27 +58,29 @@ function App() {
     setError(false);
     setMessage("");
   };
-  const getMaxNumber = (value: string) => {
-    if (+value <= startValue) {
+  const getMaxNumber = (value: number) => {
+    if (value <= startValue) {
       setError(true)
       setMessage(INCORRECT_MAX_VALUE_MESSAGE);
     } else {
       setError(false)
       setMessage(ENTER_VALUE_MESSAGE);
-      setMaxValue(+value);
+      setMaxValue(value);
+      setDisabledButton(false)
     }
   };
-  const getStartNumber = (value: string) => {
-    if (+value < 0) {
+  const getStartNumber = (value: number) => {
+    if (value < 0) {
       setError(true)
       setMessage(INCORRECT_VALUE_MESSAGE)
-    } else if (+value >= maxValue) {
+    } else if (value >= maxValue) {
       setError(true)
       setMessage(INCORRECT_START_VALUE_MESSAGE)
     } else {
       setError(false)
       setMessage(ENTER_VALUE_MESSAGE);
-      setStartValue(+value);
+      setStartValue(value);
+      setDisabledButton(false)
     }
   };
   const onInputFocus = () => {
@@ -100,6 +102,8 @@ function App() {
             setEditModeButton={setEditModeButton}
           />
           : <Controller
+            startValue={startValue}
+            maxValue={maxValue}
             message={message}
             getLocalStorageMaxValue={getLocalStorageMaxValue}
             getLocalStorageStartValue={getLocalStorageStartValue}
