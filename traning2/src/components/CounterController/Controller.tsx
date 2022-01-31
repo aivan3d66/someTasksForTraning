@@ -12,6 +12,8 @@ type ControllerPropsType = {
   getStartNumber: (value: string) => void,
   setLocalStorage: () => void,
   disableBtn: boolean,
+  startValue: number,
+  maxValue: number
 }
 
 export const Controller: React.FC<ControllerPropsType> = (
@@ -24,7 +26,9 @@ export const Controller: React.FC<ControllerPropsType> = (
     setDisabledButton,
     getStartNumber,
     setLocalStorage,
-    disableBtn
+    disableBtn,
+    startValue,
+    maxValue
   }
 ) => {
   return (
@@ -33,6 +37,8 @@ export const Controller: React.FC<ControllerPropsType> = (
         <div className="counter-control__item">
           <label>Max value:</label>
           <SuperInputText
+            startValue={startValue}
+            maxValue={maxValue}
             message={message}
             defaultValue={getLocalStorageMaxValue()}
             getMaxNumber={getMaxNumber}
@@ -44,8 +50,11 @@ export const Controller: React.FC<ControllerPropsType> = (
           <label>Start value:</label>
           <SuperInputText
             message={message}
+            startValue={startValue}
+            maxValue={maxValue}
             defaultValue={getLocalStorageStartValue()}
             getStartNumber={getStartNumber}
+            getMaxNumber={getMaxNumber}
             onFocus={onInputFocus}
             setDisabledButton={setDisabledButton}
           />
