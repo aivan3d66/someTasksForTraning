@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useCallback, useMemo, useState} from "react";
 
 export default {
   title: 'useMemo'
@@ -8,7 +8,7 @@ export const DifficultCountingExample = () => {
   const [a, setA] = useState<number>(3)
   const [b, setB] = useState<number>(3)
 
-  let resultA = 1;
+  let resultA: number;
   let resultB = 1;
 
   resultA = useMemo(() => {
@@ -62,8 +62,7 @@ export const HelpsToReactMemo = () => {
   const [users, setUsers] = useState(['Geralt', 'Tris', 'Jaskier'])
 
   const newArray = useMemo(() => {
-    const newArray = users.filter(u => u.toLowerCase().indexOf("g") > -1)
-    return newArray;
+    return users.filter(u => u.toLowerCase().indexOf("g") > -1);
   }, [users])
 
   const addUser = () => {
@@ -77,6 +76,50 @@ export const HelpsToReactMemo = () => {
       <button onClick={() => addUser()}>add user</button>
       {counter}
       <Users users={newArray}/>
+    </>
+  )
+}
+
+const BooksSecret = (props: { books: Array<string>; addBook: () => void }) => {
+  console.log("Books")
+  return (
+    <div>
+      <button onClick={() => props.addBook()}>add book</button>
+      {
+        props.books.map((b, i) => <div key={i}>{b}</div>)
+      }
+    </div>
+  )
+}
+
+const Book = React.memo(BooksSecret);
+
+export const LikeUseCallback = () => {
+  console.log("Like")
+  const [counter, setCounter] = useState<number>(0)
+  const [books, setBooks] = useState(['React', 'TS', 'CSS'])
+
+  const newArray = useMemo(() => {
+    return books.filter(b => b.toLowerCase().indexOf("g") > -1);
+  }, [books])
+
+  const memoizedAddBook = useMemo(() => {
+    return () => {
+      const newUser = [...books, 'Abgular '];
+      setBooks(newUser);
+    }
+  }, [books]);
+
+  const memoizedAddBookTwo = useCallback(() => {
+    const newUser = [...books, 'Abgular '];
+    setBooks(newUser);
+  }, [books])
+
+  return (
+    <>
+      <button onClick={() => setCounter(counter + 1)}>+</button>
+      {counter}
+      <Book books={newArray} addBook={memoizedAddBookTwo}/>
     </>
   )
 }
