@@ -3,6 +3,9 @@ import './App.css';
 import {restoreCounter, saveCounter} from "./components/localStorage";
 import {CounterScreen} from "./components/CounterDisplay/CounterScreen";
 import {Controller} from "./components/CounterController/Controller";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./bll/store";
+import {incCounterValueAC} from "./bll/counterReducer";
 
 export type OnIncrementHandler = () => void;
 export type OnResetHandler = () => void;
@@ -14,6 +17,14 @@ const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
 const COUNT_TICK: number = 1;
 
 function App() {
+  const value = useSelector<AppStateType, number>(state => state.counter.startValue)
+  const dispatch = useDispatch();
+  const incHandler = () => {
+    dispatch(incCounterValueAC())
+  }
+
+  console.log(value)
+
   const [error, setError] = useState<boolean>(false);
   const [startValue, setStartValue] = useState<number>(0);
   const [maxValue, setMaxValue] = useState<number>(0);
