@@ -1,6 +1,10 @@
 type InitialStateType = typeof initialState
 
 const INC_COUNTER = 'INC_COUNTER'
+const SET_ERROR = 'SET_ERROR'
+const SET_MESSAGE = 'SET_MESSAGE'
+const SET_MAX_VALUE = 'SET_MAX_VALUE'
+const SET_START_VALUE = 'SET_START_VALUE'
 const GET_VALUES_FROM_LOCAL_STORAGE = 'GET_VALUES_FROM_LOCAL_STORAGE'
 
 type IncCounterValueType = ReturnType<typeof incCounterValueAC>
