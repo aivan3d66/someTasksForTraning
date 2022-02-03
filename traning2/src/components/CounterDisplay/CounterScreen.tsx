@@ -35,7 +35,6 @@ export const CounterScreen: React.FC<CounterPropsType> = (
         error={error}
         onIncrementHandler={onIncrementHandler}
         onResetHandler={resetHandler}
-        value={value}
       />
     </div>
   )
