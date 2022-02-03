@@ -3,7 +3,7 @@ import SuperButton from "../SuperButton/SuperButton";
 import React, {ChangeEvent} from "react";
 import {useDispatch} from "react-redux";
 import {setMaxCounterValueAC, setMessage, setStartCounterValueAC} from "../../bll/counterReducer";
-import {saveState} from "../../utils/localStorage";
+import {loadState, saveState} from "../../utils/localStorage";
 import { store } from "../../bll/store";
 import {MESSAGES} from "../../App";
 
@@ -36,13 +36,25 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
     dispatch(setMessage(MESSAGES.ENTER_VALUE_MESSAGE))
   }
 
+  const getDefaultStartValue = () => {
+    return loadState().counter.value
+  }
+
+  const getDefaultMaxValue = () => {
+    return loadState().counter.maxValue
+  }
+
+  const setDisabled = () => {
+    return loadState().counter.value === value && loadState().counter.maxValue === maxValue;
+  }
+
   return (
     <div className="counter-control">
       <div className="counter-control__list">
         <div className="counter-control__item">
           <label>Max value:</label>
           <SuperInputText
-            defaultValue={maxValue}
+            defaultValue={getDefaultMaxValue()}
             onChange={onMaxNumberHandler}
             onFocus={onFocusMessage}
           />
@@ -51,7 +63,7 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
           <label>Start value:</label>
           <SuperInputText
             onChange={onStartNumberHandler}
-            defaultValue={value}
+            defaultValue={getDefaultStartValue()}
             onFocus={onFocusMessage}
           />
         </div>
@@ -59,7 +71,7 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
       <div className="counter-control__btn">
         <SuperButton
           onClick={onSetValuesToLocalStorage}
-          // disabled={disableBtn}
+          disabled={setDisabled()}
         >
           Set
         </SuperButton>
