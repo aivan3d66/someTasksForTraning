@@ -17,10 +17,19 @@ type GetValuesFromLocalStorageType = ReturnType<typeof getValuesFromLocalStorage
 type SetMaxCounterValueType = ReturnType<typeof setMaxCounterValueAC>
 type SetStartCounterValueAC = ReturnType<typeof setStartCounterValueAC>
 
-type ActionType = IncCounterValueType | GetValuesFromLocalStorageType
+type ActionType =
+  IncCounterValueType
+  | GetValuesFromLocalStorageType
+  | SetMaxCounterValueType
+  | SetStartCounterValueAC
+  | SetErrorType
+  | SetMessageType
 
 const initialState = {
-  startValue: 0,
+  value: 0,
+  maxValue: 0,
+  error: false,
+  message: '',
 }
 
 export const counterReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
