@@ -1,124 +1,43 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
-import {restoreCounter, saveCounter} from "./components/localStorage";
 import {CounterScreen} from "./components/CounterDisplay/CounterScreen";
 import {Controller} from "./components/CounterController/Controller";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./bll/store";
-import {incCounterValueAC} from "./bll/counterReducer";
+import {incCounterValueAC, setError} from "./bll/counterReducer";
 
-export type OnIncrementHandler = () => void;
-export type OnResetHandler = () => void;
-
-export const INCORRECT_MAX_VALUE_MESSAGE: string = "Incorrect value, must be > start value";
-export const INCORRECT_START_VALUE_MESSAGE: string = "Incorrect value, must be < max value";
-const INCORRECT_VALUE_MESSAGE: string = "Incorrect value, must be > 0";
-const ENTER_VALUE_MESSAGE: string = "Enter values and press 'Set'";
-const COUNT_TICK: number = 1;
+export const MESSAGES = {
+  INCORRECT_MAX_VALUE_MESSAGE: "Incorrect value, must be > start value",
+  INCORRECT_START_VALUE_MESSAGE: "Incorrect value, must be < max value",
+  INCORRECT_VALUE_MESSAGE: "Incorrect value, must be > 0",
+  ENTER_VALUE_MESSAGE: "Enter values and press 'Set'",
+}
 
 function App() {
-  const value = useSelector<AppStateType, number>(state => state.counter.startValue)
+  const value = useSelector<AppStateType, number>(state => state.counter.value)
+  const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+  const error = useSelector<AppStateType, boolean>(state => state.counter.error)
+
   const dispatch = useDispatch();
+
   const incHandler = () => {
-    dispatch(incCounterValueAC())
-  }
-
-  console.log(value)
-
-  const [error, setError] = useState<boolean>(false);
-  const [startValue, setStartValue] = useState<number>(0);
-  const [maxValue, setMaxValue] = useState<number>(0);
-  const [message, setMessage] = useState<string>("");
-  const [disableBtn, setDisableBtn] = useState<boolean>(true)
-
-  const setLocalStorage = () => {
-    saveCounter("counter-max-value", maxValue)
-    saveCounter("counter-start-value", startValue)
-    setMessage("")
-    setDisableBtn(true);
-  }
-  const getLocalStorage = () => {
-    let valueStart = restoreCounter("counter-start-value", startValue);
-    setStartValue(valueStart);
-
-    let valueMax = restoreCounter("counter-max-value", maxValue);
-    setMaxValue(valueMax);
-  }
-  const getLocalStorageStartValue = () => {
-    return restoreCounter("counter-start-value", startValue);
-  }
-  const getLocalStorageMaxValue = () => {
-    return restoreCounter("counter-max-value", maxValue);
-  }
-
-  useEffect(() => {
-    getLocalStorage()
-  }, [setStartValue, setMaxValue])
-
-  const onIncrementHandler: OnIncrementHandler = () => {
-    if (startValue < maxValue) {
-      setStartValue(startValue + COUNT_TICK);
+    if (value < maxValue) {
+      dispatch(incCounterValueAC())
     } else {
-      setError(true);
+      dispatch(setError(true))
     }
-  };
-  const onResetHandler: OnResetHandler = () => {
-    getLocalStorage();
-    setError(false);
-    setMessage("");
-  };
-  const getMaxNumber = (value: number) => {
-    if (value <= startValue) {
-      setError(true)
-      setMessage(INCORRECT_MAX_VALUE_MESSAGE);
-    } else {
-      setError(false)
-      setMessage(ENTER_VALUE_MESSAGE);
-      setMaxValue(value);
-      setDisabledButton(false)
-    }
-  };
-  const getStartNumber = (value: number) => {
-    if (value < 0) {
-      setError(true)
-      setMessage(INCORRECT_VALUE_MESSAGE)
-    } else if (value >= maxValue) {
-      setError(true)
-      setMessage(INCORRECT_START_VALUE_MESSAGE)
-    } else {
-      setError(false)
-      setMessage(ENTER_VALUE_MESSAGE);
-      setStartValue(value);
-      setDisabledButton(false)
-    }
-  };
-  const onInputFocus = () => {
-    setMessage(ENTER_VALUE_MESSAGE)
-  };
-  const setDisabledButton = (value: boolean) => setDisableBtn(value);
+  }
+
+  console.log(`${value} - start`)
 
   return (
     <div className="App">
       <CounterScreen
-        startValue={startValue}
+        value={value}
         error={error}
-        message={message}
-        onIncrementHandler={onIncrementHandler}
-        onResetHandler={onResetHandler}
+        onIncrementHandler={incHandler}
       />
-      <Controller
-        startValue={startValue}
-        maxValue={maxValue}
-        message={message}
-        getLocalStorageMaxValue={getLocalStorageMaxValue}
-        getLocalStorageStartValue={getLocalStorageStartValue}
-        getMaxNumber={getMaxNumber}
-        onInputFocus={onInputFocus}
-        setDisabledButton={setDisabledButton}
-        getStartNumber={getStartNumber}
-        setLocalStorage={setLocalStorage}
-        disableBtn={disableBtn}
-      />
+      <Controller value={value} maxValue={maxValue}/>
     </div>
   );
 }
