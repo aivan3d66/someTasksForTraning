@@ -1,36 +1,41 @@
 import {Screen} from "./Screen";
 import {ControlButtons} from "../CounterController/ControlButtons";
 import React from "react";
+import {getValueFromLocalStorageTC, setError, setMessage} from "../../bll/counterReducer";
+import {useDispatch} from "react-redux";
 
 type CounterPropsType = {
-  startValue: number,
+  value: number,
   error: boolean,
-  message: string,
   onIncrementHandler: () => void,
-  onResetHandler: () => void
 }
 
 export const CounterScreen: React.FC<CounterPropsType> = (
   {
-    startValue,
+    value,
     error,
-    message,
     onIncrementHandler,
-    onResetHandler
   }
 ) => {
+  const dispatch = useDispatch();
+
+  const resetHandler = () => {
+    dispatch(setError(false));
+    dispatch(setMessage(''));
+    dispatch(getValueFromLocalStorageTC());
+  }
+
   return (
     <div className="counter-interface">
       <Screen
-        startValue={startValue}
+        startValue={value}
         error={error}
-        message={message}
       />
       <ControlButtons
         error={error}
         onIncrementHandler={onIncrementHandler}
-        onResetHandler={onResetHandler}
-        startValue={startValue}
+        onResetHandler={resetHandler}
+        value={value}
       />
     </div>
   )
