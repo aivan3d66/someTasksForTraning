@@ -1,16 +1,14 @@
 import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes, KeyboardEvent, useState} from 'react'
-import {INCORRECT_MAX_VALUE_MESSAGE, INCORRECT_START_VALUE_MESSAGE} from '../../App'
 import s from './SuperInputText.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../bll/store";
+import { MESSAGES } from '../../App';
+import {setError, setMessage} from "../../bll/counterReducer";
 
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
 type SuperInputTextPropsType = DefaultInputPropsType & {
   onEnter?: () => void
-  spanClassName?: string,
-  setDisabledButton: (value: boolean) => void,
-  message: string,
-  startValue: number,
-  maxValue: number
 }
 
 const SuperInput: React.FC<SuperInputTextPropsType> = (
@@ -20,31 +18,35 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
     onKeyPress,
     onEnter,
     className,
-    spanClassName,
-    setDisabledButton,
-    message,
-    startValue,
-    maxValue,
     ...restProps
   }
 ) => {
 
-  const [red, setRed] = useState<boolean>(false)
+  const [red, setRed] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+  const value = useSelector<AppStateType, number>(state => state.counter.value);
+  const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue);
+  const message = useSelector<AppStateType, string>(state => state.counter.message);
+
 
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    setDisabledButton(false)
     if (+e.currentTarget.value < 0) {
       setRed(true)
-      setDisabledButton(true)
-    } else if (startValue >= maxValue) {
+      dispatch(setError(true))
+      dispatch(setMessage(MESSAGES.INCORRECT_VALUE_MESSAGE))
+    } else if (value > maxValue) {
       setRed(true)
-      setDisabledButton(true)
-    } else if (startValue < maxValue) {
+      dispatch(setError(true))
+      dispatch(setMessage(MESSAGES.INCORRECT_START_VALUE_MESSAGE))
+    } else if (value < maxValue) {
       setRed(false)
-      setDisabledButton(true)
+      dispatch(setError(false))
+      dispatch(setMessage(''))
     } else {
-      setDisabledButton(false)
       setRed(false)
+      dispatch(setError(false))
+      dispatch(setMessage(''))
     }
 
     onChange && onChange(e)
@@ -58,7 +60,7 @@ const SuperInput: React.FC<SuperInputTextPropsType> = (
   }
 
   const finalInputClassName = `${red ? s.errorInput : s.superInput} ${className}`
-  const redBorderClassName = message === INCORRECT_MAX_VALUE_MESSAGE || message === INCORRECT_START_VALUE_MESSAGE ? s.errorInput : finalInputClassName;
+  const redBorderClassName = message === MESSAGES.INCORRECT_MAX_VALUE_MESSAGE || message === MESSAGES.INCORRECT_START_VALUE_MESSAGE ? s.errorInput : finalInputClassName;
 
   return (
     <>
