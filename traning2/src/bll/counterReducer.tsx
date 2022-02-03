@@ -82,7 +82,6 @@ export const setMaxCounterValueAC = (maxValue: number) => ({type: SET_MAX_VALUE,
 export const setStartCounterValueAC = (startValue: number) => ({type: SET_START_VALUE, startValue} as const);
 export const getValuesFromLocalStorageAC = (value: number) => ({type: GET_VALUES_FROM_LOCAL_STORAGE, value} as const);
 
-
 export const getValueFromLocalStorageTC = () => (dispatch: Dispatch) => {
   let value = loadState().counter.value
   dispatch(getValuesFromLocalStorageAC(value));
