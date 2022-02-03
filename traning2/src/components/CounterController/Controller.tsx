@@ -1,42 +1,39 @@
 import SuperInputText from "../SuperInput/SuperInputText";
 import SuperButton from "../SuperButton/SuperButton";
 import React, {ChangeEvent} from "react";
+import {useDispatch} from "react-redux";
+import {setMaxCounterValueAC, setMessage, setStartCounterValueAC} from "../../bll/counterReducer";
+import {saveState} from "../../utils/localStorage";
+import { store } from "../../bll/store";
+import {MESSAGES} from "../../App";
 
 type ControllerPropsType = {
-  message: string,
-  getLocalStorageMaxValue: () => string | number | undefined,
-  getLocalStorageStartValue: any,
-  getMaxNumber: (value: number) => void,
-  getStartNumber: (value: number) => void,
-  onInputFocus: () => void,
-  setDisabledButton: (value: boolean) => void,
-  setLocalStorage: () => void,
-  disableBtn: boolean,
-  startValue: number,
+  value: number,
   maxValue: number
 }
 
-export const Controller: React.FC<ControllerPropsType> = (
-  {
-    message,
-    getLocalStorageMaxValue,
-    getLocalStorageStartValue,
-    getMaxNumber,
-    onInputFocus,
-    setDisabledButton,
-    getStartNumber,
-    setLocalStorage,
-    disableBtn,
-    startValue,
-    maxValue
-  }
-) => {
-  const onStartNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    getStartNumber(+e.currentTarget.value)
-  }
+export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => {
+  const dispatch = useDispatch();
+
+  console.log(`${maxValue} - max`)
 
   const onMaxNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    getMaxNumber(+e.currentTarget.value)
+    dispatch(setMaxCounterValueAC(+e.currentTarget.value))
+  }
+
+  const onStartNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(setStartCounterValueAC(+e.currentTarget.value))
+  }
+
+  const onSetValuesToLocalStorage = () => {
+    dispatch(setMessage(''))
+    saveState({
+      counter: store.getState().counter
+    })
+  }
+
+  const onFocusMessage = () => {
+    dispatch(setMessage(MESSAGES.ENTER_VALUE_MESSAGE))
   }
 
   return (
@@ -45,32 +42,24 @@ export const Controller: React.FC<ControllerPropsType> = (
         <div className="counter-control__item">
           <label>Max value:</label>
           <SuperInputText
-            startValue={startValue}
-            maxValue={maxValue}
-            message={message}
-            defaultValue={getLocalStorageMaxValue()}
+            defaultValue={maxValue}
             onChange={onMaxNumberHandler}
-            onFocus={onInputFocus}
-            setDisabledButton={setDisabledButton}
+            onFocus={onFocusMessage}
           />
         </div>
         <div className="counter-control__item">
           <label>Start value:</label>
           <SuperInputText
-            message={message}
-            startValue={startValue}
-            maxValue={maxValue}
-            defaultValue={getLocalStorageStartValue()}
             onChange={onStartNumberHandler}
-            onFocus={onInputFocus}
-            setDisabledButton={setDisabledButton}
+            defaultValue={value}
+            onFocus={onFocusMessage}
           />
         </div>
       </div>
       <div className="counter-control__btn">
         <SuperButton
-          onClick={setLocalStorage}
-          disabled={disableBtn}
+          onClick={onSetValuesToLocalStorage}
+          // disabled={disableBtn}
         >
           Set
         </SuperButton>
