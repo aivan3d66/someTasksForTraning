@@ -2,9 +2,14 @@ import SuperInputText from "../SuperInput/SuperInputText";
 import SuperButton from "../SuperButton/SuperButton";
 import React, {ChangeEvent, useState} from "react";
 import {useDispatch} from "react-redux";
-import {setError, setMaxCounterValueAC, setMessage, setStartCounterValueAC} from "../../bll/counterReducer";
+import {
+  setError,
+  setMaxCounterValueAC,
+  setMessage,
+  setStartCounterValueAC
+} from "../../bll/counterReducer";
 import {loadState, saveState} from "../../utils/localStorage";
-import { store } from "../../bll/store";
+import {store} from "../../bll/store";
 import {MESSAGES} from "../../App";
 
 type ControllerPropsType = {
@@ -13,22 +18,26 @@ type ControllerPropsType = {
 }
 
 export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => {
-  const dispatch = useDispatch();
-  const [red, setRed] = useState<boolean>(false);
 
-  console.log(`${maxValue} - max`)
+  const dispatch = useDispatch();
+
+  const [red, setRed] = useState<boolean>(false);
+  const [disabled, setDisabled] = useState<boolean>(true);
 
   const onMaxNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (+e.currentTarget.value < 0) {
       setRed(true)
+      setDisabled(true);
       dispatch(setError(true))
       dispatch(setMessage(MESSAGES.INCORRECT_VALUE_MESSAGE))
     } else if (+e.currentTarget.value <= value) {
       setRed(true)
+      setDisabled(true);
       dispatch(setError(true))
       dispatch(setMessage(MESSAGES.INCORRECT_MAX_VALUE_MESSAGE))
     }  else {
       setRed(false)
+      setDisabled(false);
       dispatch(setError(false))
       dispatch(setMessage(MESSAGES.ENTER_VALUE_MESSAGE))
     }
@@ -38,25 +47,21 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
   const onStartNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
     if (+e.currentTarget.value < 0) {
       setRed(true)
+      setDisabled(true);
       dispatch(setError(true))
       dispatch(setMessage(MESSAGES.INCORRECT_VALUE_MESSAGE))
     } else if (+e.currentTarget.value >= maxValue) {
       setRed(true)
+      setDisabled(true);
       dispatch(setError(true))
       dispatch(setMessage(MESSAGES.INCORRECT_START_VALUE_MESSAGE))
     }  else {
       setRed(false)
+      setDisabled(false);
       dispatch(setError(false))
       dispatch(setMessage(MESSAGES.ENTER_VALUE_MESSAGE))
     }
     dispatch(setStartCounterValueAC(+e.currentTarget.value));
-  }
-
-  const onSetValuesToLocalStorage = () => {
-    dispatch(setMessage(''))
-    saveState({
-      counter: store.getState().counter
-    })
   }
 
   const onFocusMessage = () => {
@@ -71,8 +76,12 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
     return loadState().counter.maxValue
   }
 
-  const setDisabled = () => {
-    return loadState().counter.value === value && loadState().counter.maxValue === maxValue;
+  const onSetValuesToLocalStorage = () => {
+    dispatch(setMessage(''))
+    saveState({
+      counter: store.getState().counter
+    })
+    setDisabled(true);
   }
 
   return (
@@ -100,7 +109,7 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
       <div className="counter-control__btn">
         <SuperButton
           onClick={onSetValuesToLocalStorage}
-          disabled={setDisabled()}
+          disabled={disabled}
         >
           Set
         </SuperButton>

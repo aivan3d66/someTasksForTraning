@@ -28,8 +28,6 @@ function App() {
     }
   }
 
-  console.log(`${value} - start`)
-
   return (
     <div className="App">
       <CounterScreen
