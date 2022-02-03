@@ -1,8 +1,8 @@
 import SuperInputText from "../SuperInput/SuperInputText";
 import SuperButton from "../SuperButton/SuperButton";
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, useState} from "react";
 import {useDispatch} from "react-redux";
-import {setMaxCounterValueAC, setMessage, setStartCounterValueAC} from "../../bll/counterReducer";
+import {setError, setMaxCounterValueAC, setMessage, setStartCounterValueAC} from "../../bll/counterReducer";
 import {loadState, saveState} from "../../utils/localStorage";
 import { store } from "../../bll/store";
 import {MESSAGES} from "../../App";
@@ -14,15 +14,42 @@ type ControllerPropsType = {
 
 export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => {
   const dispatch = useDispatch();
+  const [red, setRed] = useState<boolean>(false);
 
   console.log(`${maxValue} - max`)
 
   const onMaxNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setMaxCounterValueAC(+e.currentTarget.value))
+    if (+e.currentTarget.value < 0) {
+      setRed(true)
+      dispatch(setError(true))
+      dispatch(setMessage(MESSAGES.INCORRECT_VALUE_MESSAGE))
+    } else if (+e.currentTarget.value <= value) {
+      setRed(true)
+      dispatch(setError(true))
+      dispatch(setMessage(MESSAGES.INCORRECT_MAX_VALUE_MESSAGE))
+    }  else {
+      setRed(false)
+      dispatch(setError(false))
+      dispatch(setMessage(MESSAGES.ENTER_VALUE_MESSAGE))
+    }
+    dispatch(setMaxCounterValueAC(+e.currentTarget.value));
   }
 
   const onStartNumberHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(setStartCounterValueAC(+e.currentTarget.value))
+    if (+e.currentTarget.value < 0) {
+      setRed(true)
+      dispatch(setError(true))
+      dispatch(setMessage(MESSAGES.INCORRECT_VALUE_MESSAGE))
+    } else if (+e.currentTarget.value >= maxValue) {
+      setRed(true)
+      dispatch(setError(true))
+      dispatch(setMessage(MESSAGES.INCORRECT_START_VALUE_MESSAGE))
+    }  else {
+      setRed(false)
+      dispatch(setError(false))
+      dispatch(setMessage(MESSAGES.ENTER_VALUE_MESSAGE))
+    }
+    dispatch(setStartCounterValueAC(+e.currentTarget.value));
   }
 
   const onSetValuesToLocalStorage = () => {
@@ -57,6 +84,7 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
             defaultValue={getDefaultMaxValue()}
             onChange={onMaxNumberHandler}
             onFocus={onFocusMessage}
+            red={red}
           />
         </div>
         <div className="counter-control__item">
@@ -65,6 +93,7 @@ export const Controller: React.FC<ControllerPropsType> = ({value, maxValue}) => 
             onChange={onStartNumberHandler}
             defaultValue={getDefaultStartValue()}
             onFocus={onFocusMessage}
+            red={red}
           />
         </div>
       </div>
