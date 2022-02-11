@@ -21,9 +21,15 @@ export const Example2 = () => {
     document.title = counter.toString();
   }, 2000)
 
+  useEffect(() => {
+    setInterval(() => {
+      setCounter(counter + 1)
+    }, 1000)
+  })
+
   return (
     <>
-      <button onClick={() => setCounter(counter + 1)}>+</button>
+      {/*<button onClick={() => setCounter(counter + 1)}>+</button>*/}
       {counter}
     </>
   )
