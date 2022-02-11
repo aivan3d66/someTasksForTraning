@@ -1,19 +1,23 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default  {
-  title: 'useState demo',
+  title: 'useEffect demo',
 }
 
 export const Example2 = () => {
   console.log('Ex1');
 
   // const initValue = useMemo(generateData, []);
-  const [counter, setCounter] = useState(0);
-  const changer = (state: number) => state + 1;
+  const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    console.log('useEffect')
+    document.title = counter.toString();
+  }, [counter])
 
   return (
     <>
-      <button onClick={() => setCounter(changer)}>+</button>
+      <button onClick={() => setCounter(counter + 1)}>+</button>
       {counter}
     </>
   )
