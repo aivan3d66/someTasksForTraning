@@ -15,6 +15,12 @@ export const Example2 = () => {
     document.title = counter.toString();
   }, [counter])
 
+
+  setTimeout(() => {
+    console.log('setTimeout')
+    document.title = counter.toString();
+  }, 2000)
+
   return (
     <>
       <button onClick={() => setCounter(counter + 1)}>+</button>
