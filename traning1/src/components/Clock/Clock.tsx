@@ -12,17 +12,11 @@ export const Clock: React.FC<PropsType> = (props) => {
     }, 1000)
   })
 
-  const secondsString = date.getSeconds() < 10
-    ? '0' + date.getSeconds()
-    : date.getSeconds()
+  const getCorrectTimeString = (number: number) =>  number < 10 ? '0' + number : number
 
-  const minutesString = date.getMinutes() < 10
-    ? '0' + date.getMinutes()
-    : date.getMinutes()
-
-  const hoursString = date.getHours() < 10
-    ? '0' + date.getHours()
-    : date.getHours()
+  const secondsString = getCorrectTimeString(date.getSeconds());
+  const minutesString = getCorrectTimeString(date.getMinutes());
+  const hoursString = getCorrectTimeString(date.getHours());
 
   return (
     <div>
