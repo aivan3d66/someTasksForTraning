@@ -17,7 +17,7 @@ export const Clock: React.FC<PropsType> = (props) => {
     }
   }, [])
 
-  const getCorrectTimeString = (number: number) =>  number < 10 ? '0' + number : number
+  const getCorrectTimeString = (number: number) => number < 10 ? '0' + number : number
 
   const secondsString = getCorrectTimeString(date.getSeconds());
   const minutesString = getCorrectTimeString(date.getMinutes());
@@ -25,11 +25,21 @@ export const Clock: React.FC<PropsType> = (props) => {
 
   return (
     <div>
-      <span>{hoursString}</span>
-      :
-      <span>{minutesString}</span>
-      :
-      <span>{secondsString}</span>
+      {
+        props.mode === 'digital'
+          ? <>
+            <span>{hoursString}</span>
+            :
+            <span>{minutesString}</span>
+            :
+            <span>{secondsString}</span>
+          </>
+          : <>
+            ANALOG
+          </>
+      }
+
+
     </div>
   )
 }
