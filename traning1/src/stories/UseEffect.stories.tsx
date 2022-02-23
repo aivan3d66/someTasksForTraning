@@ -4,7 +4,7 @@ export default  {
   title: 'UseEffect/UseEffect demo',
 }
 
-export const Example2 = () => {
+export const UseEffectExample = () => {
   console.log('Ex1');
 
   // const initValue = useMemo(generateData, []);
@@ -44,10 +44,12 @@ export const ResetEffectExample = () => {
     console.log('Effect occurred');
   }, []);
 
+  const increase = () => setCounter(counter + 1);
+
   return (
     <>
       Hello, counter: {counter}
-      <button onClick={() => setCounter(counter + 1)}>
+      <button onClick={increase}>
         +
       </button>
 
