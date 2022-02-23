@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 
 export default  {
-  title: 'useEffect demo',
+  title: 'UseEffect/UseEffect demo',
 }
 
 export const Example2 = () => {
@@ -31,6 +31,26 @@ export const Example2 = () => {
     <>
       {/*<button onClick={() => setCounter(counter + 1)}>+</button>*/}
       {counter}
+    </>
+  )
+}
+
+export const ResetEffectExample = () => {
+  const [counter, setCounter] = useState(1);
+
+  console.log('SetTimeoutExample');
+
+  useEffect(() => {
+    console.log('Effect occurred');
+  }, []);
+
+  return (
+    <>
+      Hello, counter: {counter}
+      <button onClick={() => setCounter(counter + 1)}>
+        +
+      </button>
+
     </>
   )
 }
