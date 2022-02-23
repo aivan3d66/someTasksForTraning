@@ -3,6 +3,16 @@ import {ClockViewPropsType} from "./Clock";
 import "./Clock.css";
 
 export const AnalogClockView: React.FC<ClockViewPropsType> = ({date}) => {
+  const secondsStyle = {
+    transform: `rotate(${date.getSeconds() * 6}deg)`
+  };
+  const minutesStyle = {
+    transform: `rotate(${date.getMinutes() * 6}deg)`
+  };
+  const hoursStyle = {
+    transform: `rotate(${date.getHours() * 30}deg)`
+  };
+
   return (
     <div className={"clock"}>
       <div className={"analog-clock"}>
