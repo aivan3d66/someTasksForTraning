@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 
 type PropsType = {
-
+  mode: "digital" | "analog",
 }
 
-export const Clock: React.FC<PropsType> = () => {
+export const Clock: React.FC<PropsType> = (props) => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
