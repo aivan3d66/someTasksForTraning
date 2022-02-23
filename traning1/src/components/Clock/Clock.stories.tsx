@@ -8,3 +8,7 @@ export default {
 export const  BaseAnalogExample = () => {
    return <Clock/>
 }
+
+export const  BaseDigitalExample = () => {
+  return <Clock/>
+}
