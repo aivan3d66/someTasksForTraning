@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-export default  {
+export default {
   title: 'Use Effect/UseEffect demo',
 }
 
@@ -67,10 +67,13 @@ export const KeysTrackerExample = () => {
   console.log('Component rendered with ' + text);
 
   useEffect(() => {
-    window.document.addEventListener('keypress', (e) => {
-      console.log(e.code);
-      setText(text + e.code)
-    })
+    const handler = (e: KeyboardEvent) => {
+      setText((state) => state + e.key);
+    }
+    window.document.addEventListener('keypress', handler)
+    return () => {
+      window.removeEventListener('keypress', handler)
+    }
   }, [text]);
 
   return (
